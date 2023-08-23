@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:credit-bureau-api="http://www.mulesoft.org/schema/mule/credit-bureau-api" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/credit-bureau-api http://www.mulesoft.org/schema/mule/credit-bureau-api/current/mule-credit-bureau-api.xsd http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+    <apikit:config name="credit-bureau-config" api="resource::21c62897-93ee-4f64-8d96-647a66917876:credit-bureau:1.2.0:raml:zip:credit-bureau.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <credit-bureau-api:config name="Credit_Bureau_API_Config" doc:name="Credit Bureau API Config" doc:id="adf881d0-4c4f-484d-9886-ff8fb01d6b43" property_host="${thirdstream.host}" property_port="443" property_protocol="HTTPS" property_x-api-key="${https.thirdstream.credit.bureau.api.key}" property_basePath="${thirdstream.credit-bureau.basepath}">
+        <credit-bureau-api:connection />
+    </credit-bureau-api:config>
+    <global-property name="https.private.port" value="8092" />
+    <global-property doc:name="API Instnace ID" name="api.id" value="0" />
+    <http:listener-config name="HttpListener">
+        <http:listener-connection host="0.0.0.0" port="${https.private.port}" protocol="HTTPS">
+            <tls:context>
+                <tls:key-store path="keystore.jks" alias="worker" keyPassword="password" password="password" />
+            </tls:context>
+        </http:listener-connection>
+    </http:listener-config>
+    <configuration doc:name="Configuration" defaultResponseTimeout="30000" doc:id="efbaaf97-5c8a-4fe7-9a07-1da2524556c8" />
+    <api-gateway:autodiscovery apiId="${api.id}" doc:name="API Autodiscovery" doc:id="6eb85a68-2b51-49db-b560-2c6cab88a175" flowRef="credit-bureau-main" />
+    <http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="d069a577-c8d6-412d-9d90-853e80a2cec0" basePath="${https.thirdstream.basepath}">
+        <http:request-connection protocol="HTTPS" host="${thirdstream.host}" port="${https.thirdstream.port}" />
+    </http:request-config>
+    <http:request-config name="HTTP_thirdstream_Request_configuration" doc:name="HTTP Request configuration" doc:id="edbdfed8-af33-4e17-af70-44ef92d87137" basePath="${thirdstream.credit-bureau.basepath}">
+        <http:request-connection protocol="HTTPS" host="${thirdstream.host}" port="${https.thirdstream.port}" />
+    </http:request-config>
+    <flow name="credit-bureau-main">
+        <http:listener config-ref="HttpListener" path="/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="credit-bureau-config" />
+        <error-handler>
+            <on-error-propagate type="APIKIT:BAD_REQUEST">
+                <ee:transform xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: replace (error.description, '\n') with ', '
+}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[400]]></ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <ee:transform xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Resource not found"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">404</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
+                <ee:transform xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Method not allowed"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">405</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
+                <ee:transform xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Not acceptable"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">406</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+                <ee:transform xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Unsupported media type"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">415</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+            <on-error-continue type="APIKIT:NOT_IMPLEMENTED">
+                <ee:transform xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Not Implemented"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">501</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-continue>
+        </error-handler>
+    </flow>
+    <flow name="credit-bureau-console">
+        <http:listener config-ref="HttpListener" path="/credit-bureau/v1/_console/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:console config-ref="credit-bureau-config" />
+        <error-handler>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+                <ee:transform xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd  http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd  http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{message: "Resource not found"}]]></ee:set-payload>
+                    </ee:message>
+                    <ee:variables>
+                        <ee:set-variable variableName="httpStatus">404</ee:set-variable>
+                    </ee:variables>
+                </ee:transform>
+            </on-error-propagate>
+        </error-handler>
+    </flow>
+    <flow name="post:\personalCreditReports:application\json:credit-bureau-config">
+        <ee:transform doc:name="Prepare request" doc:id="ec8675c5-65c0-4e5e-9508-eb81095e5abd">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json skipNullOn="everywhere"
+---
+{
+	jointApplicant: if (payload.jointApplicant != null) {
+		firstName: payload.jointApplicant.firstName,
+		lastName: payload.jointApplicant.lastName,
+		socialInsuranceNumber: payload.jointApplicant.socialInsuranceNumber,
+		mobilePhone: payload.jointApplicant.mobilePhone,
+		homePhone: payload.jointApplicant.homePhone,
+		previousAddresses: if (payload.jointApplicant.previousAddresses != null) payload.jointApplicant.previousAddresses map ( previousAddress , indexOfPreviousAddress ) -> {
+			streetName: previousAddress.streetName,
+			city: previousAddress.city,
+			provinceCode: previousAddress.provinceCode,
+			postalCode: previousAddress.postalCode,
+			unitNumber: previousAddress.unitNumber,
+			civicNumber: previousAddress.civicNumber
+		} else null,
+		suffixName: payload.jointApplicant.suffixName,
+		middleName: payload.jointApplicant.middleName,
+		dateOfBirth: payload.jointApplicant.dateOfBirth,
+		workPhone: payload.jointApplicant.workPhone,
+		email: payload.jointApplicant.email,
+		currentAddress: if (payload.jointApplicant.currentAddress != null) payload.jointApplicant.currentAddress else null
+	} else null,
+	applicant: if (payload.applicant != null){
+		lastName: payload.applicant.lastName,
+		homePhone: payload.applicant.homePhone,
+		previousAddresses: if (payload.applicant.previousAddresses != null) payload.applicant.previousAddresses map ( previousAddress , indexOfPreviousAddress ) -> {
+			streetName: previousAddress.streetName,
+			city: previousAddress.city,
+			provinceCode: previousAddress.provinceCode,
+			postalCode: previousAddress.postalCode,
+			unitNumber: previousAddress.unitNumber,
+			civicNumber: previousAddress.civicNumber
+		} else null,
+		dateOfBirth: payload.applicant.dateOfBirth,
+		currentAddress: if (payload.applicant.currentAddress != null) {
+			streetName: payload.applicant.currentAddress.streetName,
+			city: payload.applicant.currentAddress.city,
+			provinceCode: payload.applicant.currentAddress.provinceCode,
+			postalCode: payload.applicant.currentAddress.postalCode,
+			unitNumber: payload.applicant.currentAddress.unitNumber,
+			civicNumber: payload.applicant.currentAddress.civicNumber
+		} else null,
+		currentEmployment: if (payload.applicant.currentEmployment != null) {
+			employerAddress: payload.applicant.currentEmployment.employerAddress,
+			occupationName: payload.applicant.currentEmployment.occupationName,
+			employerName: payload.applicant.currentEmployment.employerName,
+			employerPhone: payload.applicant.currentEmployment.employerPhone,
+			occupationTypeCode: payload.applicant.currentEmployment.occupationTypeCode
+		} else null,
+		firstName: payload.applicant.firstName,
+		socialInsuranceNumber: payload.applicant.socialInsuranceNumber,
+		mobilePhone: payload.applicant.mobilePhone,
+		suffixName: payload.applicant.suffixName,
+		middleName: payload.applicant.middleName,
+		workPhone: payload.applicant.workPhone,
+		email: payload.applicant.email
+	} else null
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+        <set-variable value='${productGroup}' doc:name="Set productGroup" doc:id="5cfce2b0-4506-4867-a3f6-6846d6ad5a09" variableName="productGroup" />
+		<set-variable value="${https.thirdstream.credit.bureau.api.key}" doc:name="Set thirdstreamApiKey" doc:id="8dcefbd9-d99e-4cb4-a18f-dbd2c2b676e1" variableName="thirdstreamApiKey"/>
+		<choice doc:name="Choice" doc:id="c32f91aa-2a2b-45a3-b2ac-8c6e9bf520d1">
+            <when expression="#[vars.productGroup != null]">
+				<http:request method="POST" doc:name="Request - ThirdSteam Personal Credit Report" doc:id="8517eb0d-a918-480f-917d-bbe3dccaa296" config-ref="HTTP_thirdstream_Request_configuration" path="/reports/personalcredit">
+                    <http:headers><![CDATA[#[output application/java
+---
+{
+	'X-API-Scope' : "group=" ++ vars.productGroup,
+	'X-API-Key' : vars.thirdstreamApiKey
+}]]]></http:headers>
+                </http:request>
+            </when>
+            <otherwise>
+                <credit-bureau-api:getpersonalcreditreport doc:name="GetPersonalCreditReport" doc:id="fb6a0f3a-95db-4725-b84c-0b7f326bcda1" config-ref="Credit_Bureau_API_Config" />
+            </otherwise>
+        </choice>
+        <!-- 		<http:request method="POST" doc:name="Request" doc:id="2d564787-eb86-41d4-888e-d20487b08f1a" config-ref="TS_HTTP_Request_configuration" path="/reports/personalcredit"/> -->
+        <ee:transform doc:name="Transform Response Message" doc:id="f0978723-257a-41f5-9cf2-056ad9c10860">
+            <ee:message>
+                <ee:set-payload resource="ts-credit-report-to-api-credit-report.dwl" />
+            </ee:message>
+        </ee:transform>
+		<ee:transform doc:name="filtering empty objects" doc:id="69758544-457c-433e-8ee9-45b9c3efd90e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+fun treeFilter(value: Any, predicate: (value:Any) -> Boolean) =
+    value  match {
+        case object is Object ->  do {
+            object mapObject ((value, key, index) -> 
+                (key): treeFilter(value, predicate)
+            )
+            filterObject ((value, key, index) -> predicate(value))
+        }
+        case array is Array -> do {
+            array map ((item, index) -> treeFilter(item, predicate))
+            filter ((item, index) -> predicate(item))                 
+        }
+        else -> $
+}
+
+---
+payload treeFilter ((value) -> 
+    value match {
+        case v is Array| Object | Null | "" -> !isEmpty(v)
+        else -> true
+    }
+)]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="12ff1a21-4c69-4974-8de7-fc3c9c828290" type="CREDIT-BUREAU-API:SERVICE_UNAVAILABLE, HTTP:SERVICE_UNAVAILABLE" >
+				<ee:transform doc:name="Error message" doc:id="d24f28f5-1a1a-474e-bc39-d3cef452102c">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: if (error.description != null) error.description 
+	else if (error.cause.message != null) error.cause.message
+	else if (error.errorMessage.payload != null) error.errorMessage.payload 
+	else "HTTP 409 Conflict"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<set-variable value="409" doc:name="Set httpStatus 409" doc:id="60bd0070-62f9-45aa-b1ae-6d5b2854a6a0" variableName="httpStatus" />
+			</on-error-continue>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="7dab1f0e-9ad6-49d3-ac15-9244dc22c7ca" type="ANY">
+				<ee:transform doc:name="Error Message" doc:id="6c78f05c-b4b1-46b2-96b4-536e1f6c5816">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: if(error.errorMessage.payload != null) error.errorMessage.payload
+		else if (error.description != null) error.description
+		else if(error.detailedDescription != null) error.detailedDescription
+		else "Server Error"
+	
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<set-variable value="500" doc:name="Set httpStatus 500" doc:id="dcf29102-4dda-4a4d-ac47-f2e137d40a13" variableName="httpStatus" />
+			</on-error-continue>
+		</error-handler>
+    </flow>
+    <flow name="post:\businessCreditReports:application\json:credit-bureau-config">
+        <logger level="DEBUG" doc:name="Logger" doc:id="b94f5cfd-e2f9-4821-a9f4-11e22f17a221" message="Start of post:\businessCreditReports:application\json:credit-bureau-config flow" category="app.businessCreditReports"/>
+        <set-variable value="#[payload.confidenceThreshold as Number]" doc:name="Set Variable - confidenceThreshhold" doc:id="db2c7c4c-2aaf-4a16-93d9-62857a3342d7" variableName="confidenceThreshold" />
+        <flow-ref doc:name="Flow Reference - thirdstream-business-search" doc:id="e739fba8-1c9d-4695-a0b9-e2e99fa701c5" target="businessSearchResults" name="thirdstream-business-search" />
+        <choice doc:name="Check for multiple business's being returned" doc:id="c4134f08-a5f4-4f93-95e4-7c357bc2962d">
+            <when expression="#[sizeOf(vars.businessSearchResults.results) &gt; 1]">
+                <logger level="INFO" doc:name="Logger" doc:id="8a8ad8a4-0e76-4686-a0a8-8346df1a6867" />
+                <ee:transform doc:name="Transform Message" doc:id="8a6ea66f-1560-4608-9138-917fb9264841">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"status" : "MULTIPLE_HITS"
+}]]></ee:set-payload>
+                    </ee:message>
+                </ee:transform>
+            </when>
+            <otherwise>
+                <ee:transform doc:name="Transform Message" doc:id="5657dc56-52ef-456c-8c1c-bbe372e51116">
+                    <ee:message>
+                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	companyNumber: vars.businessSearchResults.results[0].primaryCompanyNumber,
+	companyName : payload.legalName,
+	address:
+	{
+		unitNumber: payload.address.unitNumber,
+		civicNumber: payload.address.civicNumber,
+		streetName: payload.address.streetName,
+		city: payload.address.city,
+		provinceCode: payload.address.provinceCode,
+		postalCode: payload.address.postalCode
+	},
+	phoneNumber : payload.phoneNumber
+	}]]></ee:set-payload>
+                    </ee:message>
+                </ee:transform>
+                <http:request method="POST" doc:name="Request - ThirdSteam Business Credit Report" doc:id="215bd6b2-0149-4965-8c70-a1e8ddcdfb2b" config-ref="HTTP_Request_configuration" path="${https.thirdstream.path}/business" responseTimeout="${https.thirdstream.response.timeout}">
+                    <http:headers><![CDATA[#[output application/java
+---
+{
+	'X-API-Key' : p('https.thirdstream.commercial.credit.api.key')
+}]]]></http:headers>
+                </http:request>
+                <choice doc:name="Check hitStatus" doc:id="0215c2a5-0f0b-45b6-8bec-b39172fca8e6">
+                    <when expression="#[payload.hitStatus == &quot;HIT&quot;]">
+                        <choice doc:name="Check Confidence Level" doc:id="36565781-b5ea-4cdf-ae2d-398970528ad4">
+                            <when expression="#[payload.creditReport.scoreSummary.compositeIndex as Number &gt;= vars.confidenceThreshold]">
+                                <logger level="DEBUG" doc:name="Logger" doc:id="770640c6-1fcc-4fc0-bbe4-26e2e79ad502" message="Confidence level passed" category="app.businessCreditReports"/>
+                                <ee:transform doc:name="Transform Message" doc:id="0390d662-854e-4946-8b8b-7cd0e2aa7534">
+                                    <ee:message>
+                                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+import firstWith from dw::core::Arrays
+import * from dw::Runtime
+
+var businessFailureRiskScore = payload.creditReport.scoreSummary.scores firstWith ($.code == "BFRS2")
+
+---
+{
+  "status": "HIT",
+  "creditInformationScore": payload.creditReport.scoreSummary.compositeIndex,
+  "businessFailureRiskScore": if (businessFailureRiskScore.value != null) businessFailureRiskScore.value else fail('Missing BFRS2 code in score values'),
+  "sourceReport": payload.sourceResponse
+}]]></ee:set-payload>
+                                    </ee:message>
+                                </ee:transform>
+                            </when>
+                            <otherwise>
+                                <logger level="DEBUG" doc:name="Logger" doc:id="2b7a18f2-7caa-4f7e-b03c-89131c72e18c" message="Confidence level check failed" category="app.businessCreditReports"/>
+                                <ee:transform doc:name="Transform Message" doc:id="20db45ed-e9ad-4a8c-8a78-9edba982c0c1">
+                                    <ee:message>
+                                        <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  "status": "NO_HIT"
+}]]></ee:set-payload>
+                                    </ee:message>
+                                </ee:transform>
+                            </otherwise>
+                        </choice>
+                    </when>
+                    <otherwise>
+                        <logger level="DEBUG" doc:name="Logger" doc:id="e4522e7b-d59b-4d63-a005-64309330dcb6" message="No Hits for submitted business" category="app.businessCreditReports"/>
+                        <ee:transform doc:name="Transform Message" doc:id="938b67e3-ffe3-4022-9d9e-cd7f396714ff">
+                            <ee:message>
+                                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  "status": "NO_HIT"
+}]]></ee:set-payload>
+                            </ee:message>
+                        </ee:transform>
+                    </otherwise>
+                </choice>
+            </otherwise>
+        </choice>
+        <logger level="DEBUG" doc:name="Logger" doc:id="8829d22b-245c-4be7-9347-3ef513a26fcf" message="End of post:\businessCreditReports:application\json:credit-bureau-config flow" category="app.businessCreditReports"/>
+		<error-handler>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="feac0709-de30-4024-b949-0089254a394f" type="HTTP:SERVICE_UNAVAILABLE" >
+				<ee:transform doc:name="Error message" doc:id="46fee286-7b73-4193-a9f0-8ec657f915a1">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: if (error.description != null) error.description 
+	else if (error.cause.message != null) error.cause.message
+	else if (error.errorMessage.payload != null) error.errorMessage.payload 
+	else "HTTP 409 Conflict"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<set-variable value="409" doc:name="Set httpStatus 409" doc:id="08faf2e4-9066-4d3a-a042-d7bbddd3055f" variableName="httpStatus" />
+			</on-error-continue>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b30a8128-6be5-4ad6-a354-a9eda0a8a1ed" type="ANY">
+				<choice doc:name="Choice" doc:id="8856ff39-81c7-48dc-9675-511b23432b2b" >
+					<when expression='#[error.errorType.asString == "APP:SEARCH_NO_BUSINESS_FOUND"]'>
+						<ee:transform doc:name="Transform Message" doc:id="792df3e1-ba39-468f-a4f4-d864562ff617">
+							<ee:message>
+								<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"status" : "NO_HIT"
+}]]></ee:set-payload>
+							</ee:message>
+						</ee:transform>
+						<set-variable value="200" doc:name="Set Variable - httpStatus" doc:id="734f570a-7813-4804-b288-0cd8d5342c61" variableName="httpStatus"/>
+					</when>
+					<otherwise >
+						<ee:transform doc:name="Transform Message" doc:id="1330fe4d-12c6-4437-8e0b-307031140dd2" >
+							<ee:message >
+								<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: if(error.errorMessage.payload != null) error.errorMessage.payload
+		else if (error.description != null) error.description
+		else if(error.detailedDescription != null) error.detailedDescription
+		else "Server Error"
+	
+}]]></ee:set-payload>
+							</ee:message>
+						</ee:transform>
+						<set-variable value="500" doc:name="Set Variable - httpStatus" doc:id="6ba62d46-d20c-4ce3-9634-69fc85b60fd5" variableName="httpStatus"/>
+					</otherwise>
+				</choice>
+			</on-error-continue>
+        </error-handler>
+    </flow>
+    <flow name="thirdstream-business-search" doc:id="425fa802-ef69-48f3-b283-2b36badefa12">
+        <logger level="DEBUG" doc:name="Logger" doc:id="5cdb51f0-4354-474e-a255-28e11c36609e" message="Start of thirdstream-business-search flow" category="app.businessCreditReports"/>
+        <ee:transform doc:name="Transform Message" doc:id="5aeb50ff-3bff-43a4-941b-af3e892c3513">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	customerReferenceNumber: "CWB-Credit-Bureau-sAPI",
+	companyName : payload.legalName,
+	address:
+	{
+		unitNumber: payload.address.unitNumber,
+		civicNumber: payload.address.civicNumber,
+		streetName: payload.address.streetName,
+		city: payload.address.city,
+		provinceCode: payload.address.provinceCode,
+		postalCode: payload.address.postalCode
+	},
+	phoneNumber : payload.phoneNumber
+	}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+        <http:request method="POST" doc:name="Request - ThirdStream Business Search" doc:id="57d00b68-77a8-455d-aad5-06099d212fab" config-ref="HTTP_Request_configuration" path="/${https.thirdstream.path}/search">
+            <http:headers><![CDATA[#[output application/java
+---
+{
+	'X-API-Key' : p('https.thirdstream.commercial.credit.api.key')
+}]]]></http:headers>
+        </http:request>
+        <choice doc:name="Choice" doc:id="db24465b-96f8-4857-8217-e23ca8f800c8">
+            <when expression="#[payload.hitStatus == &quot;HIT&quot;]">
+                <logger level="DEBUG" doc:name="Logger" doc:id="cd1d03f1-b585-4641-b3f4-642029179486" message="Business Search returned results" category="app.businessCreditReports"/>
+                <choice doc:name="Choice" doc:id="726afab7-c96c-4dd7-837a-0577f5d41146">
+                    <when expression="#[sizeOf(payload.results) == 1]">
+                        <logger level="DEBUG" doc:name="Logger" doc:id="500c3aea-b75f-4d71-8c7c-4346d9c842f8" message="Single business search result found" category="app.businessCreditReports"/>
+                    </when>
+                    <otherwise>
+                        <logger level="DEBUG" doc:name="Logger" doc:id="a69aebf9-4e83-4d2b-8abe-5343e7964253" message="More than one business match has been found" category="app.businessCreditReports"/>
+                    </otherwise>
+                </choice>
+            </when>
+            <otherwise>
+                <raise-error doc:name="Raise error" doc:id="299d08e8-be64-4c51-a585-d7cd74025be0" type="APP:SEARCH_NO_BUSINESS_FOUND" description="No results were returned for the business that was searched" />
+            </otherwise>
+        </choice>
+        <logger level="DEBUG" doc:name="Logger" doc:id="0efc9b9e-f7cd-43c0-a051-ad12b3ed6252" message="End of thirdstream-business-search flow" category="app.businessCreditReports"/>
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="ade38eee-1b9e-4d6d-b8fb-adabd984ec31" type="HTTP:SERVICE_UNAVAILABLE">
+				<ee:transform doc:name="Error message" doc:id="3e5db1ca-55a8-42cf-9143-f368f381bfe3">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: if (error.description != null) error.description 
+	else if (error.cause.message != null) error.cause.message
+	else if (error.errorMessage.payload != null) error.errorMessage.payload 
+	else "HTTP 409 Conflict"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<set-variable value="409" doc:name="Set httpStatus 409" doc:id="1bfa13db-e35a-4454-94a1-82648c41d840" variableName="httpStatus" />
+			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="65b7c65c-8631-4b8c-af9d-f426225dd809" type="ANY">
+				<choice doc:name="Choice" doc:id="06e77afe-4d60-412e-ac0a-e84959668e18">
+					<when expression='#[error.errorType.asString == "APP:SEARCH_NO_BUSINESS_FOUND"]'>
+						<ee:transform doc:name="Transform Message" doc:id="2f294a91-fa34-401b-93c9-9aaa557cb307">
+							<ee:message>
+								<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"status" : "NO_HIT"
+}]]></ee:set-payload>
+							</ee:message>
+						</ee:transform>
+						<set-variable value="200" doc:name="Set Variable - httpStatus" doc:id="41b20c22-1fc7-4e75-8538-fb5ab50e7dcc" variableName="httpStatus" />
+					</when>
+					<otherwise>
+						<ee:transform doc:name="Transform Message" doc:id="571e8e50-fe8c-49f0-b4bb-97f4b9d16c0c">
+							<ee:message>
+								<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: if(error.errorMessage.payload != null) error.errorMessage.payload
+		else if (error.description != null) error.description
+		else if(error.detailedDescription != null) error.detailedDescription
+		else "Server Error"
+	
+}]]></ee:set-payload>
+							</ee:message>
+						</ee:transform>
+						<set-variable value="500" doc:name="Set Variable - httpStatus" doc:id="b79ffff2-f38a-4ba2-9038-2dc0e375606f" variableName="httpStatus" />
+					</otherwise>
+				</choice>
+			</on-error-propagate>
+        </error-handler>
+    </flow>
+</mule>

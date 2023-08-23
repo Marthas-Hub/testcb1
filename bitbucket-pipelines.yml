@@ -1,0 +1,44 @@
+image: bitsinglass/mule-build:1
+
+pipelines:
+  branches:
+    master:
+    - step:
+        name: Build and deploy.
+        caches:
+          - maven
+        script:
+          - mvn -B package deploy -DmuleDeploy -Danypoint.authToken=${ANYPOINT_TOKEN}
+  custom:
+    release:
+    - step:
+        name: Trigger release and prepare for next development iteration
+        caches:
+          - maven
+        script:
+          - mvn -B versions:set -DremoveSnapshot
+          - version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          - mvn -B test
+          - git commit -m "Release v$version" pom.xml
+          - git tag "v$version"
+          #Prepare for next development iteration
+          - mvn -B build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT
+          - git commit -m "Prepare for next development iteration" pom.xml
+          - git push origin master "v$version"
+  tags:
+    v*:
+    - step:
+        name: Release
+        caches:
+          - maven
+        script:
+          - version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          - test "v$version" != "$BITBUCKET_TAG" && echo "Tag ($BITBUCKET_TAG) does not match version in pom ($version)." && exit 1
+          - mvn -B package deploy -Danypoint.authToken=${ANYPOINT_TOKEN}
+        artifacts:
+          - target/*.jar
+    - step:
+        name: Publish property documentation
+        script:
+          - gav=$(echo '${project.groupId}/${project.artifactId}/${project.version}' | mvn help:evaluate  --non-recursive -q -DforceStdout)
+          - curl --show-error --fail -H "Authorization:Bearer ${ANYPOINT_TOKEN}" -X PUT --url "https://sandbox.integration.cwb.com/dev/mule-application-configuration/v1/applications/${gav}/properties" -H 'Content-Type:application/yaml' --data-binary @application-properties.yaml

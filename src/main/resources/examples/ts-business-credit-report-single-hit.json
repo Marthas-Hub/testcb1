@@ -1,0 +1,1437 @@
+{
+    "creditReport": {
+        "businessInformation": {
+            "companyInfo": {
+                "companyName": "Donuts-R-Us",
+                "legalName": "2355731 Ontario inc",
+                "address": {
+                    "addressLine1": "street number and name",
+                    "addressLine2": "apartment, suite or space number",
+                    "city": "NORTH YORK",
+                    "province": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "postalCode": "V1Y 6R2",
+                    "country": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }
+                },
+                "phone": {
+                    "phoneNumber": "403 555-1234",
+                    "extensionCode": "208",
+                    "phoneType": "Home"
+                },
+                "fax": {
+                    "phoneNumber": "403 555-1234",
+                    "extensionCode": "208",
+                    "phoneType": "Home"
+                }
+            },
+            "reportDetails": {
+                "companyNumber": "0109988715",
+                "requestorNumber": "0109988715",
+                "referenceNumber": "testreference",
+                "reportDate": "2021-06-18T00:00:00",
+                "fileCreatedDate": "2010-06-18T00:00:00",
+                "fileLastUpdatedDate": "2020-05-14T00:00:00",
+                "customizationCode": "VVVF0000"
+            }
+        },
+        "additionalBusinessInfo": {
+            "registrationNumber": "123456789",
+            "effectiveDate": "2021-06-18T00:00:00",
+            "reportedDate": "2021-06-18T00:00:00",
+            "businessContacts": [{
+                "firstName": "Bill",
+                "middleName": "S",
+                "lastName": "Jagger",
+                "jobTitle": "Director"
+            }],
+            "otherTradingNames": [
+                "string"
+            ],
+            "standardIndustrialClassification": {
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            },
+            "northAmericanIndustryClassification": {
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            },
+            "employeeInfo": {
+                "reportedDate": "2017-09-04",
+                "employeeSize": 50,
+                "employeeDetail": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }
+            },
+            "salesInfo": {
+                "reportedDate": "2018-06-17T00:00:00",
+                "salesVolume": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "salesDetail": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }
+            }
+        },
+        "scoreSummary": {
+            "compositeIndex": "8",
+            "riskLevel": "Very low risk of failure",
+            "paymentIndex": 22,
+            "scores": [{
+                "value": 376,
+                "riskLevel": "Very low risk of failure",
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }],
+            "riskClasses": [{
+                "value": 376,
+                "riskLevel": "Very low risk of failure",
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }]
+        },
+        "reportHighlights": {
+            "bankReportDate": "2021-06-18T00:00:00",
+            "corporateSearchDate": "2021-06-18T00:00:00",
+            "inquiryCount": 3,
+            "accountCount": 13,
+            "delinquencies": {
+                "count": 51,
+                "currencyCode": "CAD",
+                "amount": 1200.0
+            },
+            "mostSevereStatus": {
+                "date": "2020-05-31T00:00:00",
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            },
+            "totalChargeOffs": {
+                "count": 51,
+                "currencyCode": "CAD",
+                "amount": 1200.0
+            },
+            "largestWriteOff": {
+                "date": "2019-10-16T00:00:00",
+                "currencyCode": "CAD",
+                "amount": 1200.0
+            },
+            "totalCurrentCreditExposure": {
+                "currencyCode": "CAD",
+                "amount": 1200.0
+            },
+            "totalOutstanding": {
+                "currencyCode": "CAD",
+                "amount": 1200.0
+            },
+            "totalCurrentBalance": {
+                "currencyCode": "CAD",
+                "amount": 1200.0
+            },
+            "nonFinancial": {
+                "accountCount": 3,
+                "delinquencies": {
+                    "count": 51,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "mostSevereStatus": {
+                    "date": "2020-05-31T00:00:00",
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "singleHighestCredit": {
+                    "single90Day": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "single13Month": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "singleAllLines": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    }
+                },
+                "creditLimit": {
+                    "credit90Day": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "credit13Month": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "creditAllLines": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    }
+                },
+                "totalChargeOffs": {
+                    "count": 51,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "largestWriteOff": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalCurrentCreditExposure": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalOutstanding": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalCurrentBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalPastDue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }
+            },
+            "financial": {
+                "linesGuaranteed": 10.0,
+                "excessLimit": 20.0,
+                "revolvingUtilization": 20.0,
+                "fixedUtilization": 20.0,
+                "accountCount": 3,
+                "delinquencies": {
+                    "count": 51,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "mostSevereStatus": {
+                    "date": "2020-05-31T00:00:00",
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "singleHighestCredit": {
+                    "single90Day": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "single13Month": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "singleAllLines": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    }
+                },
+                "creditLimit": {
+                    "credit90Day": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "credit13Month": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "creditAllLines": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    }
+                },
+                "totalChargeOffs": {
+                    "count": 51,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "largestWriteOff": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalCurrentCreditExposure": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalOutstanding": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalCurrentBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalPastDue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }
+            }
+        },
+        "scoreDetails": {
+            "cipiScores": {
+                "compositeIndex": 8,
+                "paymentIndex": 22,
+                "ciScoring": {
+                    "allYearsOnFile": {
+                        "value": 10,
+                        "factor": 1.75
+                    },
+                    "paymentIndex": {
+                        "value": 10,
+                        "factor": 1.75
+                    },
+                    "tradeLines": {
+                        "value": 10,
+                        "factor": 1.75
+                    },
+                    "yearDifferencePaymentIndex": {
+                        "value": 10,
+                        "factor": 1.75
+                    },
+                    "negativeOccurrencCount": {
+                        "value": 10,
+                        "factor": 1.75
+                    },
+                    "lastNegativeOccurrence": {
+                        "value": 10,
+                        "factor": 1.75
+                    },
+                    "negativeOccurrencePercent": {
+                        "value": 10,
+                        "factor": 1.75
+                    }
+                },
+                "quarters": [{
+                    "quarterNumber": 2,
+                    "trendYear": 2016,
+                    "compositeIndex": 16,
+                    "paymentIndex": 0
+                }]
+            },
+            "scores": [{
+                "value": "376",
+                "reasons": [{
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }],
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }],
+            "scoreTrends": [{
+                "quarters": [{
+                    "quarterNumber": 4,
+                    "trendYear": 2020,
+                    "scoreValue": 10
+                }],
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }],
+            "monthlyTrends": [{
+                "averageScore": 3,
+                "minimumScore": 3,
+                "maximumScore": 12,
+                "scoreSlope": 12.0,
+                "monthCount": 12
+            }],
+            "riskClasses": [{
+                "value": "376",
+                "reasons": [{
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }],
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }]
+        },
+        "creditReferenceSummary": {
+            "creditReferences": [{
+                "paymentIndex": 0,
+                "creditReferenceCount": 0,
+                "highCredit": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "currentBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "pastDuePeriods": [{
+                    "periodNumber": 2,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }],
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }]
+        },
+        "creditReferenceDetails": {
+            "creditReferences": [{
+                "reportedDate": "2017-09-04T00:00:00",
+                "isSecuredCredit": false,
+                "supplier": {
+                    "supplierName": "GM FINANCIAL",
+                    "phone": {
+                        "phoneNumber": "403 555-1234",
+                        "extensionCode": "208",
+                        "phoneType": "Home"
+                    }
+                },
+                "openedDate": "2017-09-04T00:00:00",
+                "closedDate": "2017-09-04T00:00:00",
+                "totalPastDue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "writeOff": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "originalLimit": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "creditLimit": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "highCredit": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "currentBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "balancePeriods": [{
+                    "periodNumber": 2,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }],
+                "paymentTerm": {
+                    "duration": 10,
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "paymentHabits": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "paymentStatuses": [{
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }],
+                "standardIndustrialClassification": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        },
+        "quarterlyPaymentTrends": [{
+            "trendYear": 2019,
+            "quarters": [{
+                "quarterNumber": 4096,
+                "paymentIndex": 0,
+                "compositeIndex": 0,
+                "creditReferenceCount": 0,
+                "totalBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "currentBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "pastDuePeriods": [{
+                    "periodNumber": 2,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }]
+            }]
+        }],
+        "returnedChequeDetails": {
+            "returnedCheques": [{
+                "bankDate": "2021-06-18T00:00:00",
+                "currencyCode": "string",
+                "chequeAmount": 1200.0,
+                "bankInfo": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "creditorName": "Bill",
+                "reason": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "status": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        },
+        "collectionDetails": {
+            "collections": [{
+                "reportedDate": "2021-06-18T00:00:00",
+                "claimDate": "2021-06-18T00:00:00",
+                "creditorName": "ABC",
+                "debtorName": "TRE AMICI IMPORTS INC.",
+                "currencyCode": "string",
+                "claimAmount": 300.0,
+                "paidAmount": 30.0,
+                "accountBalanceAmount": 30.0,
+                "reportStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "agencyName": "ABC",
+                "statusDate": "2021-06-18T00:00:00",
+                "paidDate": "2021-06-18T00:00:00",
+                "closedDate": "2021-06-18T00:00:00",
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        },
+        "legalDetails": {
+            "legals": [{
+                "reportedDate": "2021-06-18T00:00:00",
+                "claimDate": "2021-06-18T00:00:00",
+                "courtFileNumber": "string",
+                "defendantName": "Bill",
+                "plaintiffName": "Bob",
+                "legalAmount": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "legalType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "legalNature": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "courtId": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "courtLocation": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "courtProvince": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "securityType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }],
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }],
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        },
+        "corporateSearch": {
+            "registrations": [{
+                "reportedDate": "2017-09-04T00:00:00",
+                "reportedStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "registrationNumber": "123456789",
+                "effectiveDate": "2021-06-18T00:00:00",
+                "registrationType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "jurisdictionLocation": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "jurisdictionType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "principals": [{
+                "reportedDate": "2017-09-04T00:00:00",
+                "reportedStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "shareCount": 120,
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }],
+                "firstName": "Bill",
+                "middleName": "S",
+                "lastName": "Jagger",
+                "jobTitle": "Director"
+            }],
+            "properties": [{
+                "reportedDate": "2017-09-04T00:00:00",
+                "reportedStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "ownershipType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "ownershipSource": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "propertyCovered": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "propertyValue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "addressInfo": "string",
+                "evaluationDate": "string",
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "employees": [{
+                "reportedStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "reportedDate": "2017-09-04",
+                "employeeSize": 50,
+                "employeeDetail": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }
+            }],
+            "sales": [{
+                "reportedStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "reportedDate": "2018-06-17T00:00:00",
+                "salesVolume": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "salesDetail": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }
+            }]
+        },
+        "bankruptcies": [{
+            "reportedDate": "2021-06-18T00:00:00",
+            "estateNumber": "2147483647",
+            "estate": {
+                "estateName": "ABC",
+                "address": {
+                    "addressLine1": "street number and name",
+                    "addressLine2": "apartment, suite or space number",
+                    "city": "NORTH YORK",
+                    "province": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "postalCode": "V1Y 6R2",
+                    "country": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }
+                },
+                "dischargeDate": "2021-06-18T00:00:00",
+                "regionalOffice": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "creditorMeetingDate": "2021-06-18T00:00:00"
+            },
+            "courtInformation": {
+                "courtFileNumber": "string",
+                "filedDate": "string",
+                "courtName": "string",
+                "courtProvince": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "hearingDate": "string",
+                "dischargeType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "estateType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "divisionNumber": "string",
+                "judicialDistrict": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "dividends": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "assetValue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "liabilityValue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }
+            },
+            "receiver": {
+                "receiverName": "Sam W. McDonald",
+                "address": {
+                    "addressLine1": "street number and name",
+                    "addressLine2": "apartment, suite or space number",
+                    "city": "NORTH YORK",
+                    "province": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "postalCode": "V1Y 6R2",
+                    "country": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }
+                },
+                "phone": {
+                    "phoneNumber": "403 555-1234",
+                    "extensionCode": "208",
+                    "phoneType": "Home"
+                },
+                "fax": {
+                    "phoneNumber": "403 555-1234",
+                    "extensionCode": "208",
+                    "phoneType": "Home"
+                },
+                "regionalOffice": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "individualLicense": "209",
+                "corporateLicense": "194"
+            },
+            "trustee": {
+                "trusteeName": "John H. Morton",
+                "address": {
+                    "addressLine1": "street number and name",
+                    "addressLine2": "apartment, suite or space number",
+                    "city": "NORTH YORK",
+                    "province": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "postalCode": "V1Y 6R2",
+                    "country": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }
+                },
+                "phone": {
+                    "phoneNumber": "403 555-1234",
+                    "extensionCode": "208",
+                    "phoneType": "Home"
+                },
+                "dischargeDate": "2020-02-14T00:00:00"
+            },
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        }],
+        "bankingReportDetails": {
+            "financialInstitutionDetails": [{
+                "reportedDate": "2017-09-04T00:00:00",
+                "reportedStatus": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "financialInstitution": {
+                    "institutionName": "CANADIAN IMPERIAL BANK OF COMMERCE",
+                    "branchDomicile": "OLD KINGSTON ROAD AT MORRISH",
+                    "institutionNumber": "010",
+                    "transitNumber": "00832",
+                    "address": {
+                        "addressLine1": "street number and name",
+                        "addressLine2": "apartment, suite or space number",
+                        "city": "NORTH YORK",
+                        "province": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        },
+                        "postalCode": "V1Y 6R2",
+                        "country": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    },
+                    "phone": {
+                        "phoneNumber": "403 555-1234",
+                        "extensionCode": "208",
+                        "phoneType": "Home"
+                    },
+                    "fax": {
+                        "phoneNumber": "403 555-1234",
+                        "extensionCode": "208",
+                        "phoneType": "Home"
+                    },
+                    "lastUpdatedDate": "2021-06-18T00:00:00",
+                    "referencePhone": {
+                        "phoneNumber": "403 555-1234",
+                        "extensionCode": "208",
+                        "phoneType": "Home"
+                    },
+                    "referenceFax": {
+                        "phoneNumber": "403 555-1234",
+                        "extensionCode": "208",
+                        "phoneType": "Home"
+                    },
+                    "signingOfficerInfo": {
+                        "signingOfficers": [{
+                            "firstName": "Bob",
+                            "middleName": "M",
+                            "lastName": "Jagger"
+                        }],
+                        "signingOfficerComment": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        },
+                        "specialComment": "string"
+                    }
+                },
+                "bankAccounts": [{
+                    "openedDate": "2021-06-18T00:00:00",
+                    "openedPeriod": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "accountCount": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "accountTypes": [{
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }],
+                    "accountBalance": {
+                        "amountRange": {
+                            "lowAmount": 0.0,
+                            "highAmount": 7600.0
+                        },
+                        "figuresRange": {
+                            "lowFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "highFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    },
+                    "returnedCheques": {
+                        "count": 18,
+                        "comment": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        },
+                        "frequency": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    }
+                }],
+                "linesOfCredit": [{
+                    "openedDate": "2021-06-18T00:00:00",
+                    "openedPeriod": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "creditLineCount": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "creditLineTypes": [{
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }],
+                    "securedLines": [{
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }],
+                    "rating": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "authorizedCredit": {
+                        "amountRange": {
+                            "lowAmount": 0.0,
+                            "highAmount": 7600.0
+                        },
+                        "figuresRange": {
+                            "lowFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "highFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    },
+                    "utilizedCredit": {
+                        "utilizationPercent": 25.0,
+                        "amountRange": {
+                            "lowAmount": 0.0,
+                            "highAmount": 7600.0
+                        },
+                        "figuresRange": {
+                            "lowFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "highFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    }
+                }],
+                "loans": [{
+                    "openedDate": "2021-06-18T00:00:00",
+                    "openedPeriod": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "loanCount": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "loanTypes": [{
+                        "mortgageAddress": "string",
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }],
+                    "rating": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "termsPaymentFrequency": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "terms": {
+                        "amountRange": {
+                            "lowAmount": 0.0,
+                            "highAmount": 7600.0
+                        },
+                        "figuresRange": {
+                            "lowFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "highFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    },
+                    "securedLines": [{
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }],
+                    "authorizedAmount": {
+                        "amountRange": {
+                            "lowAmount": 0.0,
+                            "highAmount": 7600.0
+                        },
+                        "figuresRange": {
+                            "lowFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "highFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    },
+                    "balanceOwing": {
+                        "amountRange": {
+                            "lowAmount": 0.0,
+                            "highAmount": 7600.0
+                        },
+                        "figuresRange": {
+                            "lowFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "highFigures": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "reason": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    }
+                }],
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        },
+        "financialTradeDetails": {
+            "financialDetails": [{
+                "tradeNumber": 135,
+                "guarantorCount": 24,
+                "creditLimit": {
+                    "credit90Day": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "credit13Month": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "creditAllLines": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    }
+                },
+                "lastActivityDate": "2021-06-18T00:00:00",
+                "scheduledPayment": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "actualPayment": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "accountType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "rating": "string",
+                "paymentType": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "paymentFrequency": {
+                    "frequency1": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "frequency2": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }
+                },
+                "paymentDay": "string",
+                "paymentProfile": "string",
+                "reportedDate": "2017-09-04T00:00:00",
+                "isSecuredCredit": false,
+                "supplier": {
+                    "supplierName": "GM FINANCIAL",
+                    "phone": {
+                        "phoneNumber": "403 555-1234",
+                        "extensionCode": "208",
+                        "phoneType": "Home"
+                    }
+                },
+                "openedDate": "2017-09-04T00:00:00",
+                "closedDate": "2017-09-04T00:00:00",
+                "totalPastDue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "writeOff": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "originalLimit": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "highCredit": {
+                    "date": "2019-10-16T00:00:00",
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "currentBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "balancePeriods": [{
+                    "periodNumber": 2,
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                }],
+                "paymentTerm": {
+                    "duration": 10,
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "paymentHabits": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "paymentStatuses": [{
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }],
+                "standardIndustrialClassification": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "guarantorDetails": [{
+                "tradeNumber": 123,
+                "guarantorCount": 26,
+                "guarantorName": "Bob",
+                "additionalNames": "string",
+                "address": {
+                    "addressLine1": "street number and name",
+                    "addressLine2": "apartment, suite or space number",
+                    "city": "NORTH YORK",
+                    "province": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    },
+                    "postalCode": "V1Y 6R2",
+                    "country": {
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }
+                }
+            }],
+            "totalDetail": {
+                "totalCreditLimit": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalHighCredit": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalScheduledPayment": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalPayment": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalBalance": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "totalPastDue": {
+                    "currencyCode": "CAD",
+                    "amount": 1200.0
+                },
+                "fixedUtilizationPercent": 64.0,
+                "revolvingUtilizationPercent": 15.0
+            }
+        },
+        "lienDetails": {
+            "liens": [{
+                "lienInfo": {
+                    "reportedDate": "2017-09-04T00:00:00",
+                    "lienNumber": "0000 000 000",
+                    "cautionFiling": "string",
+                    "principal": {
+                        "currencyCode": "CAD",
+                        "amount": 1200.0
+                    },
+                    "lienPeriod": 0,
+                    "collateralClasses": [{
+                        "code": "TMNT",
+                        "description": "Teenage mutant ninja turtles"
+                    }],
+                    "registeredDate": "2017-09-04T00:00:00",
+                    "amendmentDate": "2017-09-04T00:00:00",
+                    "maturedDate": "2017-09-04T00:00:00",
+                    "renewalPeriod": 0,
+                    "debtors": [{
+                        "debtorName": "Bill",
+                        "address": {
+                            "addressLine1": "street number and name",
+                            "addressLine2": "apartment, suite or space number",
+                            "city": "NORTH YORK",
+                            "province": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "postalCode": "V1Y 6R2",
+                            "country": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        }
+                    }],
+                    "securedParty": {
+                        "securedPartyName": "string",
+                        "address": {
+                            "addressLine1": "street number and name",
+                            "addressLine2": "apartment, suite or space number",
+                            "city": "NORTH YORK",
+                            "province": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            },
+                            "postalCode": "V1Y 6R2",
+                            "country": {
+                                "code": "TMNT",
+                                "description": "Teenage mutant ninja turtles"
+                            }
+                        },
+                        "assignorName": "string"
+                    }
+                },
+                "motorVehicles": [{
+                    "vehicleIdentificationNumber": "4Y1SL65848Z411439",
+                    "modelYear": 1981,
+                    "manufacturerName": "Honda",
+                    "bodyStyle": "Sedan"
+                }],
+                "otherRegisteredDebtors": [{
+                    "debtorName": "Bill",
+                    "address": {
+                        "addressLine1": "street number and name",
+                        "addressLine2": "apartment, suite or space number",
+                        "city": "NORTH YORK",
+                        "province": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        },
+                        "postalCode": "V1Y 6R2",
+                        "country": {
+                            "code": "TMNT",
+                            "description": "Teenage mutant ninja turtles"
+                        }
+                    }
+                }],
+                "comments": [{
+                    "dateTime": "2021-06-18T09:00:00+00:00",
+                    "text": "string"
+                }]
+            }],
+            "comments": [{
+                "dateTime": "2021-06-18T09:00:00+00:00",
+                "text": "string"
+            }]
+        },
+        "ownerPrincipals": [{
+            "reportedDate": "2021-06-18",
+            "principalName": "Bob",
+            "companyName": "THE FINTECH API SHOP",
+            "companyAddressInfo": "string"
+        }],
+        "principalGuarantors": [{
+            "guarantorName": "Bill",
+            "companyName": "ABC",
+            "address": {
+                "addressLine1": "street number and name",
+                "addressLine2": "apartment, suite or space number",
+                "city": "NORTH YORK",
+                "province": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "postalCode": "V1Y 6R2",
+                "country": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }
+            },
+            "assignedDate": "2017-06-18T00:00:00"
+        }],
+        "otherFilesIncluded": [{
+            "companyNumber": "0109988715",
+            "companyName": "THE FINTECH API SHOP",
+            "address": {
+                "addressLine1": "street number and name",
+                "addressLine2": "apartment, suite or space number",
+                "city": "NORTH YORK",
+                "province": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                },
+                "postalCode": "V1Y 6R2",
+                "country": {
+                    "code": "TMNT",
+                    "description": "Teenage mutant ninja turtles"
+                }
+            }
+        }],
+        "inquiries": [{
+            "inquiryDate": "2021-06-18T00:00:00",
+            "companyName": "THE FINTECH API SHOP",
+            "phone": {
+                "phoneNumber": "403 555-1234",
+                "extensionCode": "208",
+                "phoneType": "Home"
+            },
+            "standardIndustrialClassification": {
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }
+        }],
+        "fileComments": [{
+            "dateTime": "2021-06-18T09:00:00+00:00",
+            "text": "string"
+        }],
+        "derogatorySummaries": [{
+            "count": 10,
+            "currencyCode": "string",
+            "amount": 100.0,
+            "debtorComment": {
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            },
+            "lastActivityDate": "2021-06-18T00:00:00",
+            "code": "TMNT",
+            "description": "Teenage mutant ninja turtles"
+        }],
+        "decisions": [{
+            "product": {
+                "productId": 0,
+                "productType": "string",
+                "description": "string"
+            },
+            "model": {
+                "modelId": "string",
+                "versionNumber": "string",
+                "description": "string"
+            },
+            "scoreNumber": 10,
+            "scoreIndicator": "REJECTED",
+            "result": {
+                "signIndicator": "string",
+                "value": 10,
+                "scoreNarratives": [
+                    "string"
+                ]
+            },
+            "scoreAttributes": [{
+                "id": "string",
+                "value": "string"
+            }],
+            "reasons": [{
+                "code": "TMNT",
+                "description": "Teenage mutant ninja turtles"
+            }]
+        }],
+        "attributes": [{
+            "id": "SDGA4072",
+            "value": -99
+        }],
+        "sourceResponse": "string"
+    },
+    "customerReferenceNumber": "string",
+    "hitStatus": "NO_HIT",
+    "errors": [{
+        "code": "TMNT",
+        "description": "Teenage mutant ninja turtles"
+    }]
+}

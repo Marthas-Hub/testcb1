@@ -1,0 +1,648 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="ts-business-credit-report-single-hit" format="json">
+      <types:shape format="weave" example="examples/ts-business-credit-report-single-hit.json"><![CDATA[%dw 2.0
+
+type ts_business_credit_report_single_hit = {|
+  creditReport: {|
+    businessInformation: {|
+      companyInfo: {|
+        companyName: String, 
+        legalName: String, 
+        address: {|
+          addressLine1: String, 
+          addressLine2: String, 
+          city: String, 
+          province: {|
+            code: String, 
+            description: String
+          |}, 
+          postalCode: String, 
+          country: {|
+            code: String, 
+            description: String
+          |}
+        |}, 
+        phone: {|
+          phoneNumber: String, 
+          extensionCode: String, 
+          phoneType: String
+        |}, 
+        fax: {|
+          phoneNumber: String, 
+          extensionCode: String, 
+          phoneType: String
+        |}
+      |}, 
+      reportDetails: {|
+        companyNumber: String, 
+        requestorNumber: String, 
+        referenceNumber: String, 
+        reportDate: String, 
+        fileCreatedDate: String, 
+        fileLastUpdatedDate: String, 
+        customizationCode: String
+      |}
+    |}, 
+    additionalBusinessInfo: {|
+      registrationNumber: String, 
+      effectiveDate: String, 
+      reportedDate: String, 
+      businessContacts: Array<{|        firstName: String,         middleName: String,         lastName: String,         jobTitle: String      |}>, 
+      otherTradingNames: Array<String>, 
+      standardIndustrialClassification: {|
+        code: String, 
+        description: String
+      |}, 
+      northAmericanIndustryClassification: {|
+        code: String, 
+        description: String
+      |}, 
+      employeeInfo: {|
+        reportedDate: String, 
+        employeeSize: Number {"typeId": "int"}, 
+        employeeDetail: {|
+          code: String, 
+          description: String
+        |}
+      |}, 
+      salesInfo: {|
+        reportedDate: String, 
+        salesVolume: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        salesDetail: {|
+          code: String, 
+          description: String
+        |}
+      |}
+    |}, 
+    scoreSummary: {|
+      compositeIndex: String, 
+      riskLevel: String, 
+      paymentIndex: Number {"typeId": "int"}, 
+      scores: Array<{|        value: Number {"typeId": "int"},         riskLevel: String,         code: String,         description: String      |}>, 
+      riskClasses: Array<{|        value: Number {"typeId": "int"},         riskLevel: String,         code: String,         description: String      |}>
+    |}, 
+    reportHighlights: {|
+      bankReportDate: String, 
+      corporateSearchDate: String, 
+      inquiryCount: Number {"typeId": "int"}, 
+      accountCount: Number {"typeId": "int"}, 
+      delinquencies: {|
+        count: Number {"typeId": "int"}, 
+        currencyCode: String, 
+        amount: Number {"typeId": "double"}
+      |}, 
+      mostSevereStatus: {|
+        date: String, 
+        code: String, 
+        description: String
+      |}, 
+      totalChargeOffs: {|
+        count: Number {"typeId": "int"}, 
+        currencyCode: String, 
+        amount: Number {"typeId": "double"}
+      |}, 
+      largestWriteOff: {|
+        date: String, 
+        currencyCode: String, 
+        amount: Number {"typeId": "double"}
+      |}, 
+      totalCurrentCreditExposure: {|
+        currencyCode: String, 
+        amount: Number {"typeId": "double"}
+      |}, 
+      totalOutstanding: {|
+        currencyCode: String, 
+        amount: Number {"typeId": "double"}
+      |}, 
+      totalCurrentBalance: {|
+        currencyCode: String, 
+        amount: Number {"typeId": "double"}
+      |}, 
+      nonFinancial: {|
+        accountCount: Number {"typeId": "int"}, 
+        delinquencies: {|
+          count: Number {"typeId": "int"}, 
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        mostSevereStatus: {|
+          date: String, 
+          code: String, 
+          description: String
+        |}, 
+        singleHighestCredit: {|
+          single90Day: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          single13Month: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          singleAllLines: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}
+        |}, 
+        creditLimit: {|
+          credit90Day: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          credit13Month: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          creditAllLines: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}
+        |}, 
+        totalChargeOffs: {|
+          count: Number {"typeId": "int"}, 
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        largestWriteOff: {|
+          date: String, 
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalCurrentCreditExposure: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalOutstanding: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalCurrentBalance: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalPastDue: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}
+      |}, 
+      financial: {|
+        linesGuaranteed: Number {"typeId": "double"}, 
+        excessLimit: Number {"typeId": "double"}, 
+        revolvingUtilization: Number {"typeId": "double"}, 
+        fixedUtilization: Number {"typeId": "double"}, 
+        accountCount: Number {"typeId": "int"}, 
+        delinquencies: {|
+          count: Number {"typeId": "int"}, 
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        mostSevereStatus: {|
+          date: String, 
+          code: String, 
+          description: String
+        |}, 
+        singleHighestCredit: {|
+          single90Day: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          single13Month: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          singleAllLines: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}
+        |}, 
+        creditLimit: {|
+          credit90Day: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          credit13Month: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}, 
+          creditAllLines: {|
+            currencyCode: String, 
+            amount: Number {"typeId": "double"}
+          |}
+        |}, 
+        totalChargeOffs: {|
+          count: Number {"typeId": "int"}, 
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        largestWriteOff: {|
+          date: String, 
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalCurrentCreditExposure: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalOutstanding: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalCurrentBalance: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalPastDue: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}
+      |}
+    |}, 
+    scoreDetails: {|
+      cipiScores: {|
+        compositeIndex: Number {"typeId": "int"}, 
+        paymentIndex: Number {"typeId": "int"}, 
+        ciScoring: {|
+          allYearsOnFile: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}, 
+          paymentIndex: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}, 
+          tradeLines: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}, 
+          yearDifferencePaymentIndex: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}, 
+          negativeOccurrencCount: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}, 
+          lastNegativeOccurrence: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}, 
+          negativeOccurrencePercent: {|
+            value: Number {"typeId": "int"}, 
+            factor: Number {"typeId": "double"}
+          |}
+        |}, 
+        quarters: Array<{|          quarterNumber: Number {"typeId": "int"},           trendYear: Number {"typeId": "int"},           compositeIndex: Number {"typeId": "int"},           paymentIndex: Number {"typeId": "int"}        |}>
+      |}, 
+      scores: Array<{|        value: String,         reasons: Array<{|          code: String,           description: String        |}>, 
+        code: String, 
+        description: String
+      |}>, 
+      scoreTrends: Array<{|        quarters: Array<{|          quarterNumber: Number {"typeId": "int"},           trendYear: Number {"typeId": "int"},           scoreValue: Number {"typeId": "int"}        |}>, 
+        code: String, 
+        description: String
+      |}>, 
+      monthlyTrends: Array<{|        averageScore: Number {"typeId": "int"},         minimumScore: Number {"typeId": "int"},         maximumScore: Number {"typeId": "int"},         scoreSlope: Number {"typeId": "double"},         monthCount: Number {"typeId": "int"}      |}>, 
+      riskClasses: Array<{|        value: String,         reasons: Array<{|          code: String,           description: String        |}>, 
+        code: String, 
+        description: String
+      |}>
+    |}, 
+    creditReferenceSummary: {|
+      creditReferences: Array<{|        paymentIndex: Number {"typeId": "int"},         creditReferenceCount: Number {"typeId": "int"},         highCredit: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         totalBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         currentBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         pastDuePeriods: Array<{|          periodNumber: Number {"typeId": "int"},           currencyCode: String,           amount: Number {"typeId": "double"}        |}>, 
+        code: String, 
+        description: String
+      |}>
+    |}, 
+    creditReferenceDetails: {|
+      creditReferences: Array<{|        reportedDate: String,         isSecuredCredit: Boolean,         supplier: {|          supplierName: String,           phone: {|            phoneNumber: String,             extensionCode: String,             phoneType: String          |}        |},         openedDate: String,         closedDate: String,         totalPastDue: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         writeOff: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         originalLimit: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         creditLimit: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         highCredit: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         totalBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         currentBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         balancePeriods: Array<{|          periodNumber: Number {"typeId": "int"},           currencyCode: String,           amount: Number {"typeId": "double"}        |}>, 
+        paymentTerm: {|
+          duration: Number {"typeId": "int"}, 
+          code: String, 
+          description: String
+        |}, 
+        paymentHabits: {|
+          code: String, 
+          description: String
+        |}, 
+        paymentStatuses: Array<{|          code: String,           description: String        |}>, 
+        standardIndustrialClassification: {|
+          code: String, 
+          description: String
+        |}, 
+        comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      comments: Array<{|        dateTime: String,         text: String      |}>
+    |}, 
+    quarterlyPaymentTrends: Array<{|      trendYear: Number {"typeId": "int"},       quarters: Array<{|        quarterNumber: Number {"typeId": "int"},         paymentIndex: Number {"typeId": "int"},         compositeIndex: Number {"typeId": "int"},         creditReferenceCount: Number {"typeId": "int"},         totalBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         currentBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         pastDuePeriods: Array<{|          periodNumber: Number {"typeId": "int"},           currencyCode: String,           amount: Number {"typeId": "double"}        |}>
+      |}>
+    |}>, 
+    returnedChequeDetails: {|
+      returnedCheques: Array<{|        bankDate: String,         currencyCode: String,         chequeAmount: Number {"typeId": "double"},         bankInfo: {|          code: String,           description: String        |},         creditorName: String,         reason: {|          code: String,           description: String        |},         status: {|          code: String,           description: String        |},         comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      comments: Array<{|        dateTime: String,         text: String      |}>
+    |}, 
+    collectionDetails: {|
+      collections: Array<{|        reportedDate: String,         claimDate: String,         creditorName: String,         debtorName: String,         currencyCode: String,         claimAmount: Number {"typeId": "double"},         paidAmount: Number {"typeId": "double"},         accountBalanceAmount: Number {"typeId": "double"},         reportStatus: {|          code: String,           description: String        |},         agencyName: String,         statusDate: String,         paidDate: String,         closedDate: String,         comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      comments: Array<{|        dateTime: String,         text: String      |}>
+    |}, 
+    legalDetails: {|
+      legals: Array<{|        reportedDate: String,         claimDate: String,         courtFileNumber: String,         defendantName: String,         plaintiffName: String,         legalAmount: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         legalType: {|          code: String,           description: String        |},         legalNature: {|          code: String,           description: String        |},         courtId: {|          code: String,           description: String        |},         courtLocation: {|          code: String,           description: String        |},         courtProvince: {|          code: String,           description: String        |},         securityType: {|          code: String,           description: String        |},         comments: Array<{|          dateTime: String,           text: String        |}>, 
+        code: String, 
+        description: String
+      |}>, 
+      comments: Array<{|        dateTime: String,         text: String      |}>
+    |}, 
+    corporateSearch: {|
+      registrations: Array<{|        reportedDate: String,         reportedStatus: {|          code: String,           description: String        |},         registrationNumber: String,         effectiveDate: String,         registrationType: {|          code: String,           description: String        |},         jurisdictionLocation: {|          code: String,           description: String        |},         jurisdictionType: {|          code: String,           description: String        |},         comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      principals: Array<{|        reportedDate: String,         reportedStatus: {|          code: String,           description: String        |},         shareCount: Number {"typeId": "int"},         comments: Array<{|          dateTime: String,           text: String        |}>, 
+        firstName: String, 
+        middleName: String, 
+        lastName: String, 
+        jobTitle: String
+      |}>, 
+      properties: Array<{|        reportedDate: String,         reportedStatus: {|          code: String,           description: String        |},         ownershipType: {|          code: String,           description: String        |},         ownershipSource: {|          code: String,           description: String        |},         propertyCovered: {|          code: String,           description: String        |},         propertyValue: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         addressInfo: String,         evaluationDate: String,         comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      employees: Array<{|        reportedStatus: {|          code: String,           description: String        |},         reportedDate: String,         employeeSize: Number {"typeId": "int"},         employeeDetail: {|          code: String,           description: String        |}      |}>, 
+      sales: Array<{|        reportedStatus: {|          code: String,           description: String        |},         reportedDate: String,         salesVolume: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         salesDetail: {|          code: String,           description: String        |}      |}>
+    |}, 
+    bankruptcies: Array<{|      reportedDate: String,       estateNumber: String,       estate: {|        estateName: String,         address: {|          addressLine1: String,           addressLine2: String,           city: String,           province: {|            code: String,             description: String          |},           postalCode: String,           country: {|            code: String,             description: String          |}        |},         dischargeDate: String,         regionalOffice: {|          code: String,           description: String        |},         creditorMeetingDate: String      |},       courtInformation: {|        courtFileNumber: String,         filedDate: String,         courtName: String,         courtProvince: {|          code: String,           description: String        |},         hearingDate: String,         dischargeType: {|          code: String,           description: String        |},         estateType: {|          code: String,           description: String        |},         divisionNumber: String,         judicialDistrict: {|          code: String,           description: String        |},         dividends: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         assetValue: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         liabilityValue: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |}      |},       receiver: {|        receiverName: String,         address: {|          addressLine1: String,           addressLine2: String,           city: String,           province: {|            code: String,             description: String          |},           postalCode: String,           country: {|            code: String,             description: String          |}        |},         phone: {|          phoneNumber: String,           extensionCode: String,           phoneType: String        |},         fax: {|          phoneNumber: String,           extensionCode: String,           phoneType: String        |},         regionalOffice: {|          code: String,           description: String        |},         individualLicense: String,         corporateLicense: String      |},       trustee: {|        trusteeName: String,         address: {|          addressLine1: String,           addressLine2: String,           city: String,           province: {|            code: String,             description: String          |},           postalCode: String,           country: {|            code: String,             description: String          |}        |},         phone: {|          phoneNumber: String,           extensionCode: String,           phoneType: String        |},         dischargeDate: String      |},       comments: Array<{|        dateTime: String,         text: String      |}>
+    |}>, 
+    bankingReportDetails: {|
+      financialInstitutionDetails: Array<{|        reportedDate: String,         reportedStatus: {|          code: String,           description: String        |},         financialInstitution: {|          institutionName: String,           branchDomicile: String,           institutionNumber: String,           transitNumber: String,           address: {|            addressLine1: String,             addressLine2: String,             city: String,             province: {|              code: String,               description: String            |},             postalCode: String,             country: {|              code: String,               description: String            |}          |},           phone: {|            phoneNumber: String,             extensionCode: String,             phoneType: String          |},           fax: {|            phoneNumber: String,             extensionCode: String,             phoneType: String          |},           lastUpdatedDate: String,           referencePhone: {|            phoneNumber: String,             extensionCode: String,             phoneType: String          |},           referenceFax: {|            phoneNumber: String,             extensionCode: String,             phoneType: String          |},           signingOfficerInfo: {|            signingOfficers: Array<{|              firstName: String,               middleName: String,               lastName: String            |}>, 
+            signingOfficerComment: {|
+              code: String, 
+              description: String
+            |}, 
+            specialComment: String
+          |}
+        |}, 
+        bankAccounts: Array<{|          openedDate: String,           openedPeriod: {|            code: String,             description: String          |},           accountCount: {|            code: String,             description: String          |},           accountTypes: Array<{|            code: String,             description: String          |}>, 
+          accountBalance: {|
+            amountRange: {|
+              lowAmount: Number {"typeId": "double"}, 
+              highAmount: Number {"typeId": "double"}
+            |}, 
+            figuresRange: {|
+              lowFigures: {|
+                code: String, 
+                description: String
+              |}, 
+              highFigures: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}, 
+          returnedCheques: {|
+            count: Number {"typeId": "int"}, 
+            comment: {|
+              code: String, 
+              description: String
+            |}, 
+            frequency: {|
+              code: String, 
+              description: String
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}
+        |}>, 
+        linesOfCredit: Array<{|          openedDate: String,           openedPeriod: {|            code: String,             description: String          |},           creditLineCount: {|            code: String,             description: String          |},           creditLineTypes: Array<{|            code: String,             description: String          |}>, 
+          securedLines: Array<{|            code: String,             description: String          |}>, 
+          rating: {|
+            code: String, 
+            description: String
+          |}, 
+          authorizedCredit: {|
+            amountRange: {|
+              lowAmount: Number {"typeId": "double"}, 
+              highAmount: Number {"typeId": "double"}
+            |}, 
+            figuresRange: {|
+              lowFigures: {|
+                code: String, 
+                description: String
+              |}, 
+              highFigures: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}, 
+          utilizedCredit: {|
+            utilizationPercent: Number {"typeId": "double"}, 
+            amountRange: {|
+              lowAmount: Number {"typeId": "double"}, 
+              highAmount: Number {"typeId": "double"}
+            |}, 
+            figuresRange: {|
+              lowFigures: {|
+                code: String, 
+                description: String
+              |}, 
+              highFigures: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}
+        |}>, 
+        loans: Array<{|          openedDate: String,           openedPeriod: {|            code: String,             description: String          |},           loanCount: {|            code: String,             description: String          |},           loanTypes: Array<{|            mortgageAddress: String,             code: String,             description: String          |}>, 
+          rating: {|
+            code: String, 
+            description: String
+          |}, 
+          termsPaymentFrequency: {|
+            code: String, 
+            description: String
+          |}, 
+          terms: {|
+            amountRange: {|
+              lowAmount: Number {"typeId": "double"}, 
+              highAmount: Number {"typeId": "double"}
+            |}, 
+            figuresRange: {|
+              lowFigures: {|
+                code: String, 
+                description: String
+              |}, 
+              highFigures: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}, 
+          securedLines: Array<{|            code: String,             description: String          |}>, 
+          authorizedAmount: {|
+            amountRange: {|
+              lowAmount: Number {"typeId": "double"}, 
+              highAmount: Number {"typeId": "double"}
+            |}, 
+            figuresRange: {|
+              lowFigures: {|
+                code: String, 
+                description: String
+              |}, 
+              highFigures: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}, 
+          balanceOwing: {|
+            amountRange: {|
+              lowAmount: Number {"typeId": "double"}, 
+              highAmount: Number {"typeId": "double"}
+            |}, 
+            figuresRange: {|
+              lowFigures: {|
+                code: String, 
+                description: String
+              |}, 
+              highFigures: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            reason: {|
+              code: String, 
+              description: String
+            |}
+          |}
+        |}>, 
+        comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      comments: Array<{|        dateTime: String,         text: String      |}>
+    |}, 
+    financialTradeDetails: {|
+      financialDetails: Array<{|        tradeNumber: Number {"typeId": "int"},         guarantorCount: Number {"typeId": "int"},         creditLimit: {|          credit90Day: {|            currencyCode: String,             amount: Number {"typeId": "double"}          |},           credit13Month: {|            currencyCode: String,             amount: Number {"typeId": "double"}          |},           creditAllLines: {|            currencyCode: String,             amount: Number {"typeId": "double"}          |}        |},         lastActivityDate: String,         scheduledPayment: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         actualPayment: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         accountType: {|          code: String,           description: String        |},         rating: String,         paymentType: {|          code: String,           description: String        |},         paymentFrequency: {|          frequency1: {|            code: String,             description: String          |},           frequency2: {|            code: String,             description: String          |}        |},         paymentDay: String,         paymentProfile: String,         reportedDate: String,         isSecuredCredit: Boolean,         supplier: {|          supplierName: String,           phone: {|            phoneNumber: String,             extensionCode: String,             phoneType: String          |}        |},         openedDate: String,         closedDate: String,         totalPastDue: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         writeOff: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         originalLimit: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         highCredit: {|          date: String,           currencyCode: String,           amount: Number {"typeId": "double"}        |},         totalBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         currentBalance: {|          currencyCode: String,           amount: Number {"typeId": "double"}        |},         balancePeriods: Array<{|          periodNumber: Number {"typeId": "int"},           currencyCode: String,           amount: Number {"typeId": "double"}        |}>, 
+        paymentTerm: {|
+          duration: Number {"typeId": "int"}, 
+          code: String, 
+          description: String
+        |}, 
+        paymentHabits: {|
+          code: String, 
+          description: String
+        |}, 
+        paymentStatuses: Array<{|          code: String,           description: String        |}>, 
+        standardIndustrialClassification: {|
+          code: String, 
+          description: String
+        |}, 
+        comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      guarantorDetails: Array<{|        tradeNumber: Number {"typeId": "int"},         guarantorCount: Number {"typeId": "int"},         guarantorName: String,         additionalNames: String,         address: {|          addressLine1: String,           addressLine2: String,           city: String,           province: {|            code: String,             description: String          |},           postalCode: String,           country: {|            code: String,             description: String          |}        |}      |}>, 
+      totalDetail: {|
+        totalCreditLimit: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalHighCredit: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalScheduledPayment: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalPayment: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalBalance: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        totalPastDue: {|
+          currencyCode: String, 
+          amount: Number {"typeId": "double"}
+        |}, 
+        fixedUtilizationPercent: Number {"typeId": "double"}, 
+        revolvingUtilizationPercent: Number {"typeId": "double"}
+      |}
+    |}, 
+    lienDetails: {|
+      liens: Array<{|        lienInfo: {|          reportedDate: String,           lienNumber: String,           cautionFiling: String,           principal: {|            currencyCode: String,             amount: Number {"typeId": "double"}          |},           lienPeriod: Number {"typeId": "int"},           collateralClasses: Array<{|            code: String,             description: String          |}>, 
+          registeredDate: String, 
+          amendmentDate: String, 
+          maturedDate: String, 
+          renewalPeriod: Number {"typeId": "int"}, 
+          debtors: Array<{|            debtorName: String,             address: {|              addressLine1: String,               addressLine2: String,               city: String,               province: {|                code: String,                 description: String              |},               postalCode: String,               country: {|                code: String,                 description: String              |}            |}          |}>, 
+          securedParty: {|
+            securedPartyName: String, 
+            address: {|
+              addressLine1: String, 
+              addressLine2: String, 
+              city: String, 
+              province: {|
+                code: String, 
+                description: String
+              |}, 
+              postalCode: String, 
+              country: {|
+                code: String, 
+                description: String
+              |}
+            |}, 
+            assignorName: String
+          |}
+        |}, 
+        motorVehicles: Array<{|          vehicleIdentificationNumber: String,           modelYear: Number {"typeId": "int"},           manufacturerName: String,           bodyStyle: String        |}>, 
+        otherRegisteredDebtors: Array<{|          debtorName: String,           address: {|            addressLine1: String,             addressLine2: String,             city: String,             province: {|              code: String,               description: String            |},             postalCode: String,             country: {|              code: String,               description: String            |}          |}        |}>, 
+        comments: Array<{|          dateTime: String,           text: String        |}>
+      |}>, 
+      comments: Array<{|        dateTime: String,         text: String      |}>
+    |}, 
+    ownerPrincipals: Array<{|      reportedDate: String,       principalName: String,       companyName: String,       companyAddressInfo: String    |}>, 
+    principalGuarantors: Array<{|      guarantorName: String,       companyName: String,       address: {|        addressLine1: String,         addressLine2: String,         city: String,         province: {|          code: String,           description: String        |},         postalCode: String,         country: {|          code: String,           description: String        |}      |},       assignedDate: String    |}>, 
+    otherFilesIncluded: Array<{|      companyNumber: String,       companyName: String,       address: {|        addressLine1: String,         addressLine2: String,         city: String,         province: {|          code: String,           description: String        |},         postalCode: String,         country: {|          code: String,           description: String        |}      |}    |}>, 
+    inquiries: Array<{|      inquiryDate: String,       companyName: String,       phone: {|        phoneNumber: String,         extensionCode: String,         phoneType: String      |},       standardIndustrialClassification: {|        code: String,         description: String      |}    |}>, 
+    fileComments: Array<{|      dateTime: String,       text: String    |}>, 
+    derogatorySummaries: Array<{|      count: Number {"typeId": "int"},       currencyCode: String,       amount: Number {"typeId": "double"},       debtorComment: {|        code: String,         description: String      |},       lastActivityDate: String,       code: String,       description: String    |}>, 
+    decisions: Array<{|      product: {|        productId: Number {"typeId": "int"},         productType: String,         description: String      |},       model: {|        modelId: String,         versionNumber: String,         description: String      |},       scoreNumber: Number {"typeId": "int"},       scoreIndicator: String,       result: {|        signIndicator: String,         value: Number {"typeId": "int"},         scoreNarratives: Array<String>
+      |}, 
+      scoreAttributes: Array<{|        id: String,         value: String      |}>, 
+      reasons: Array<{|        code: String,         description: String      |}>
+    |}>, 
+    attributes: Array<{|      id: String,       value: Number {"typeId": "int"}    |}>, 
+    sourceResponse: String
+  |}, 
+  customerReferenceNumber: String, 
+  hitStatus: String, 
+  errors: Array<{|    code: String,     description: String  |}>
+|} {"example": "{\\\"creditReport\\\":{\\\"businessInformation\\\":{\\\"companyInfo\\\":{\\\"companyName\\\":\\\"Donuts-R-Us\\\",\\\"legalName\\\":\\\"2355731 Ontario inc\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"fax\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"}},\\\"reportDetails\\\":{\\\"companyNumber\\\":\\\"0109988715\\\",\\\"requestorNumber\\\":\\\"0109988715\\\",\\\"referenceNumber\\\":\\\"testreference\\\",\\\"reportDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"fileCreatedDate\\\":\\\"2010-06-18T00:00:00\\\",\\\"fileLastUpdatedDate\\\":\\\"2020-05-14T00:00:00\\\",\\\"customizationCode\\\":\\\"VVVF0000\\\"}},\\\"additionalBusinessInfo\\\":{\\\"registrationNumber\\\":\\\"123456789\\\",\\\"effectiveDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"reportedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"businessContacts\\\":[{\\\"firstName\\\":\\\"Bill\\\",\\\"middleName\\\":\\\"S\\\",\\\"lastName\\\":\\\"Jagger\\\",\\\"jobTitle\\\":\\\"Director\\\"}],\\\"otherTradingNames\\\":[\\\"string\\\"],\\\"standardIndustrialClassification\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"northAmericanIndustryClassification\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"employeeInfo\\\":{\\\"reportedDate\\\":\\\"2017-09-04\\\",\\\"employeeSize\\\":50,\\\"employeeDetail\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"salesInfo\\\":{\\\"reportedDate\\\":\\\"2018-06-17T00:00:00\\\",\\\"salesVolume\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"salesDetail\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}},\\\"scoreSummary\\\":{\\\"compositeIndex\\\":\\\"8\\\",\\\"riskLevel\\\":\\\"Very low risk of failure\\\",\\\"paymentIndex\\\":22,\\\"scores\\\":[{\\\"value\\\":376,\\\"riskLevel\\\":\\\"Very low risk of failure\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"riskClasses\\\":[{\\\"value\\\":376,\\\"riskLevel\\\":\\\"Very low risk of failure\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}]},\\\"reportHighlights\\\":{\\\"bankReportDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"corporateSearchDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"inquiryCount\\\":3,\\\"accountCount\\\":13,\\\"delinquencies\\\":{\\\"count\\\":51,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"mostSevereStatus\\\":{\\\"date\\\":\\\"2020-05-31T00:00:00\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"totalChargeOffs\\\":{\\\"count\\\":51,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"largestWriteOff\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalCurrentCreditExposure\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalOutstanding\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalCurrentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"nonFinancial\\\":{\\\"accountCount\\\":3,\\\"delinquencies\\\":{\\\"count\\\":51,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"mostSevereStatus\\\":{\\\"date\\\":\\\"2020-05-31T00:00:00\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"singleHighestCredit\\\":{\\\"single90Day\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"single13Month\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"singleAllLines\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"creditLimit\\\":{\\\"credit90Day\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"credit13Month\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"creditAllLines\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"totalChargeOffs\\\":{\\\"count\\\":51,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"largestWriteOff\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalCurrentCreditExposure\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalOutstanding\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalCurrentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalPastDue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"financial\\\":{\\\"linesGuaranteed\\\":10.0,\\\"excessLimit\\\":20.0,\\\"revolvingUtilization\\\":20.0,\\\"fixedUtilization\\\":20.0,\\\"accountCount\\\":3,\\\"delinquencies\\\":{\\\"count\\\":51,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"mostSevereStatus\\\":{\\\"date\\\":\\\"2020-05-31T00:00:00\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"singleHighestCredit\\\":{\\\"single90Day\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"single13Month\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"singleAllLines\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"creditLimit\\\":{\\\"credit90Day\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"credit13Month\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"creditAllLines\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"totalChargeOffs\\\":{\\\"count\\\":51,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"largestWriteOff\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalCurrentCreditExposure\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalOutstanding\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalCurrentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalPastDue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}}},\\\"scoreDetails\\\":{\\\"cipiScores\\\":{\\\"compositeIndex\\\":8,\\\"paymentIndex\\\":22,\\\"ciScoring\\\":{\\\"allYearsOnFile\\\":{\\\"value\\\":10,\\\"factor\\\":1.75},\\\"paymentIndex\\\":{\\\"value\\\":10,\\\"factor\\\":1.75},\\\"tradeLines\\\":{\\\"value\\\":10,\\\"factor\\\":1.75},\\\"yearDifferencePaymentIndex\\\":{\\\"value\\\":10,\\\"factor\\\":1.75},\\\"negativeOccurrencCount\\\":{\\\"value\\\":10,\\\"factor\\\":1.75},\\\"lastNegativeOccurrence\\\":{\\\"value\\\":10,\\\"factor\\\":1.75},\\\"negativeOccurrencePercent\\\":{\\\"value\\\":10,\\\"factor\\\":1.75}},\\\"quarters\\\":[{\\\"quarterNumber\\\":2,\\\"trendYear\\\":2016,\\\"compositeIndex\\\":16,\\\"paymentIndex\\\":0}]},\\\"scores\\\":[{\\\"value\\\":\\\"376\\\",\\\"reasons\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"scoreTrends\\\":[{\\\"quarters\\\":[{\\\"quarterNumber\\\":4,\\\"trendYear\\\":2020,\\\"scoreValue\\\":10}],\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"monthlyTrends\\\":[{\\\"averageScore\\\":3,\\\"minimumScore\\\":3,\\\"maximumScore\\\":12,\\\"scoreSlope\\\":12.0,\\\"monthCount\\\":12}],\\\"riskClasses\\\":[{\\\"value\\\":\\\"376\\\",\\\"reasons\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}]},\\\"creditReferenceSummary\\\":{\\\"creditReferences\\\":[{\\\"paymentIndex\\\":0,\\\"creditReferenceCount\\\":0,\\\"highCredit\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"currentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"pastDuePeriods\\\":[{\\\"periodNumber\\\":2,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}],\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}]},\\\"creditReferenceDetails\\\":{\\\"creditReferences\\\":[{\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"isSecuredCredit\\\":false,\\\"supplier\\\":{\\\"supplierName\\\":\\\"GM FINANCIAL\\\",\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"}},\\\"openedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"closedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"totalPastDue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"writeOff\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"originalLimit\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"creditLimit\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"highCredit\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"currentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"balancePeriods\\\":[{\\\"periodNumber\\\":2,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}],\\\"paymentTerm\\\":{\\\"duration\\\":10,\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"paymentHabits\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"paymentStatuses\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"standardIndustrialClassification\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]},\\\"quarterlyPaymentTrends\\\":[{\\\"trendYear\\\":2019,\\\"quarters\\\":[{\\\"quarterNumber\\\":4096,\\\"paymentIndex\\\":0,\\\"compositeIndex\\\":0,\\\"creditReferenceCount\\\":0,\\\"totalBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"currentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"pastDuePeriods\\\":[{\\\"periodNumber\\\":2,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}]}]}],\\\"returnedChequeDetails\\\":{\\\"returnedCheques\\\":[{\\\"bankDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"currencyCode\\\":\\\"string\\\",\\\"chequeAmount\\\":1200.0,\\\"bankInfo\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"creditorName\\\":\\\"Bill\\\",\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"status\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]},\\\"collectionDetails\\\":{\\\"collections\\\":[{\\\"reportedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"claimDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"creditorName\\\":\\\"ABC\\\",\\\"debtorName\\\":\\\"TRE AMICI IMPORTS INC.\\\",\\\"currencyCode\\\":\\\"string\\\",\\\"claimAmount\\\":300.0,\\\"paidAmount\\\":30.0,\\\"accountBalanceAmount\\\":30.0,\\\"reportStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"agencyName\\\":\\\"ABC\\\",\\\"statusDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"paidDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"closedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]},\\\"legalDetails\\\":{\\\"legals\\\":[{\\\"reportedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"claimDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"courtFileNumber\\\":\\\"string\\\",\\\"defendantName\\\":\\\"Bill\\\",\\\"plaintiffName\\\":\\\"Bob\\\",\\\"legalAmount\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"legalType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"legalNature\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"courtId\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"courtLocation\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"courtProvince\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"securityType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}],\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]},\\\"corporateSearch\\\":{\\\"registrations\\\":[{\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"reportedStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"registrationNumber\\\":\\\"123456789\\\",\\\"effectiveDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"registrationType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"jurisdictionLocation\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"jurisdictionType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"principals\\\":[{\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"reportedStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"shareCount\\\":120,\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}],\\\"firstName\\\":\\\"Bill\\\",\\\"middleName\\\":\\\"S\\\",\\\"lastName\\\":\\\"Jagger\\\",\\\"jobTitle\\\":\\\"Director\\\"}],\\\"properties\\\":[{\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"reportedStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"ownershipType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"ownershipSource\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"propertyCovered\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"propertyValue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"addressInfo\\\":\\\"string\\\",\\\"evaluationDate\\\":\\\"string\\\",\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"employees\\\":[{\\\"reportedStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"reportedDate\\\":\\\"2017-09-04\\\",\\\"employeeSize\\\":50,\\\"employeeDetail\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}],\\\"sales\\\":[{\\\"reportedStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"reportedDate\\\":\\\"2018-06-17T00:00:00\\\",\\\"salesVolume\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"salesDetail\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}]},\\\"bankruptcies\\\":[{\\\"reportedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"estateNumber\\\":\\\"2147483647\\\",\\\"estate\\\":{\\\"estateName\\\":\\\"ABC\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"dischargeDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"regionalOffice\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"creditorMeetingDate\\\":\\\"2021-06-18T00:00:00\\\"},\\\"courtInformation\\\":{\\\"courtFileNumber\\\":\\\"string\\\",\\\"filedDate\\\":\\\"string\\\",\\\"courtName\\\":\\\"string\\\",\\\"courtProvince\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"hearingDate\\\":\\\"string\\\",\\\"dischargeType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"estateType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"divisionNumber\\\":\\\"string\\\",\\\"judicialDistrict\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"dividends\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"assetValue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"liabilityValue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"receiver\\\":{\\\"receiverName\\\":\\\"Sam W. McDonald\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"fax\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"regionalOffice\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"individualLicense\\\":\\\"209\\\",\\\"corporateLicense\\\":\\\"194\\\"},\\\"trustee\\\":{\\\"trusteeName\\\":\\\"John H. Morton\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"dischargeDate\\\":\\\"2020-02-14T00:00:00\\\"},\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"bankingReportDetails\\\":{\\\"financialInstitutionDetails\\\":[{\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"reportedStatus\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"financialInstitution\\\":{\\\"institutionName\\\":\\\"CANADIAN IMPERIAL BANK OF COMMERCE\\\",\\\"branchDomicile\\\":\\\"OLD KINGSTON ROAD AT MORRISH\\\",\\\"institutionNumber\\\":\\\"010\\\",\\\"transitNumber\\\":\\\"00832\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"fax\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"lastUpdatedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"referencePhone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"referenceFax\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"signingOfficerInfo\\\":{\\\"signingOfficers\\\":[{\\\"firstName\\\":\\\"Bob\\\",\\\"middleName\\\":\\\"M\\\",\\\"lastName\\\":\\\"Jagger\\\"}],\\\"signingOfficerComment\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"specialComment\\\":\\\"string\\\"}},\\\"bankAccounts\\\":[{\\\"openedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"openedPeriod\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"accountCount\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"accountTypes\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"accountBalance\\\":{\\\"amountRange\\\":{\\\"lowAmount\\\":0.0,\\\"highAmount\\\":7600.0},\\\"figuresRange\\\":{\\\"lowFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"highFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"returnedCheques\\\":{\\\"count\\\":18,\\\"comment\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"frequency\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"linesOfCredit\\\":[{\\\"openedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"openedPeriod\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"creditLineCount\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"creditLineTypes\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"securedLines\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"rating\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"authorizedCredit\\\":{\\\"amountRange\\\":{\\\"lowAmount\\\":0.0,\\\"highAmount\\\":7600.0},\\\"figuresRange\\\":{\\\"lowFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"highFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"utilizedCredit\\\":{\\\"utilizationPercent\\\":25.0,\\\"amountRange\\\":{\\\"lowAmount\\\":0.0,\\\"highAmount\\\":7600.0},\\\"figuresRange\\\":{\\\"lowFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"highFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"loans\\\":[{\\\"openedDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"openedPeriod\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"loanCount\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"loanTypes\\\":[{\\\"mortgageAddress\\\":\\\"string\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"rating\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"termsPaymentFrequency\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"terms\\\":{\\\"amountRange\\\":{\\\"lowAmount\\\":0.0,\\\"highAmount\\\":7600.0},\\\"figuresRange\\\":{\\\"lowFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"highFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"securedLines\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"authorizedAmount\\\":{\\\"amountRange\\\":{\\\"lowAmount\\\":0.0,\\\"highAmount\\\":7600.0},\\\"figuresRange\\\":{\\\"lowFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"highFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"balanceOwing\\\":{\\\"amountRange\\\":{\\\"lowAmount\\\":0.0,\\\"highAmount\\\":7600.0},\\\"figuresRange\\\":{\\\"lowFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"highFigures\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"reason\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]},\\\"financialTradeDetails\\\":{\\\"financialDetails\\\":[{\\\"tradeNumber\\\":135,\\\"guarantorCount\\\":24,\\\"creditLimit\\\":{\\\"credit90Day\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"credit13Month\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"creditAllLines\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}},\\\"lastActivityDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"scheduledPayment\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"actualPayment\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"accountType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"rating\\\":\\\"string\\\",\\\"paymentType\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"paymentFrequency\\\":{\\\"frequency1\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"frequency2\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"paymentDay\\\":\\\"string\\\",\\\"paymentProfile\\\":\\\"string\\\",\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"isSecuredCredit\\\":false,\\\"supplier\\\":{\\\"supplierName\\\":\\\"GM FINANCIAL\\\",\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"}},\\\"openedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"closedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"totalPastDue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"writeOff\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"originalLimit\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"highCredit\\\":{\\\"date\\\":\\\"2019-10-16T00:00:00\\\",\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"currentBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"balancePeriods\\\":[{\\\"periodNumber\\\":2,\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0}],\\\"paymentTerm\\\":{\\\"duration\\\":10,\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"paymentHabits\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"paymentStatuses\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"standardIndustrialClassification\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"guarantorDetails\\\":[{\\\"tradeNumber\\\":123,\\\"guarantorCount\\\":26,\\\"guarantorName\\\":\\\"Bob\\\",\\\"additionalNames\\\":\\\"string\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"totalDetail\\\":{\\\"totalCreditLimit\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalHighCredit\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalScheduledPayment\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalPayment\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalBalance\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"totalPastDue\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"fixedUtilizationPercent\\\":64.0,\\\"revolvingUtilizationPercent\\\":15.0}},\\\"lienDetails\\\":{\\\"liens\\\":[{\\\"lienInfo\\\":{\\\"reportedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"lienNumber\\\":\\\"0000 000 000\\\",\\\"cautionFiling\\\":\\\"string\\\",\\\"principal\\\":{\\\"currencyCode\\\":\\\"CAD\\\",\\\"amount\\\":1200.0},\\\"lienPeriod\\\":0,\\\"collateralClasses\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"registeredDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"amendmentDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"maturedDate\\\":\\\"2017-09-04T00:00:00\\\",\\\"renewalPeriod\\\":0,\\\"debtors\\\":[{\\\"debtorName\\\":\\\"Bill\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"securedParty\\\":{\\\"securedPartyName\\\":\\\"string\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"assignorName\\\":\\\"string\\\"}},\\\"motorVehicles\\\":[{\\\"vehicleIdentificationNumber\\\":\\\"4Y1SL65848Z411439\\\",\\\"modelYear\\\":1981,\\\"manufacturerName\\\":\\\"Honda\\\",\\\"bodyStyle\\\":\\\"Sedan\\\"}],\\\"otherRegisteredDebtors\\\":[{\\\"debtorName\\\":\\\"Bill\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]}],\\\"comments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}]},\\\"ownerPrincipals\\\":[{\\\"reportedDate\\\":\\\"2021-06-18\\\",\\\"principalName\\\":\\\"Bob\\\",\\\"companyName\\\":\\\"THE FINTECH API SHOP\\\",\\\"companyAddressInfo\\\":\\\"string\\\"}],\\\"principalGuarantors\\\":[{\\\"guarantorName\\\":\\\"Bill\\\",\\\"companyName\\\":\\\"ABC\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}},\\\"assignedDate\\\":\\\"2017-06-18T00:00:00\\\"}],\\\"otherFilesIncluded\\\":[{\\\"companyNumber\\\":\\\"0109988715\\\",\\\"companyName\\\":\\\"THE FINTECH API SHOP\\\",\\\"address\\\":{\\\"addressLine1\\\":\\\"street number and name\\\",\\\"addressLine2\\\":\\\"apartment, suite or space number\\\",\\\"city\\\":\\\"NORTH YORK\\\",\\\"province\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"postalCode\\\":\\\"V1Y 6R2\\\",\\\"country\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}}],\\\"inquiries\\\":[{\\\"inquiryDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"companyName\\\":\\\"THE FINTECH API SHOP\\\",\\\"phone\\\":{\\\"phoneNumber\\\":\\\"403 555-1234\\\",\\\"extensionCode\\\":\\\"208\\\",\\\"phoneType\\\":\\\"Home\\\"},\\\"standardIndustrialClassification\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}}],\\\"fileComments\\\":[{\\\"dateTime\\\":\\\"2021-06-18T09:00:00+00:00\\\",\\\"text\\\":\\\"string\\\"}],\\\"derogatorySummaries\\\":[{\\\"count\\\":10,\\\"currencyCode\\\":\\\"string\\\",\\\"amount\\\":100.0,\\\"debtorComment\\\":{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"},\\\"lastActivityDate\\\":\\\"2021-06-18T00:00:00\\\",\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}],\\\"decisions\\\":[{\\\"product\\\":{\\\"productId\\\":0,\\\"productType\\\":\\\"string\\\",\\\"description\\\":\\\"string\\\"},\\\"model\\\":{\\\"modelId\\\":\\\"string\\\",\\\"versionNumber\\\":\\\"string\\\",\\\"description\\\":\\\"string\\\"},\\\"scoreNumber\\\":10,\\\"scoreIndicator\\\":\\\"REJECTED\\\",\\\"result\\\":{\\\"signIndicator\\\":\\\"string\\\",\\\"value\\\":10,\\\"scoreNarratives\\\":[\\\"string\\\"]},\\\"scoreAttributes\\\":[{\\\"id\\\":\\\"string\\\",\\\"value\\\":\\\"string\\\"}],\\\"reasons\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}]}],\\\"attributes\\\":[{\\\"id\\\":\\\"SDGA4072\\\",\\\"value\\\":-99}],\\\"sourceResponse\\\":\\\"string\\\"},\\\"customerReferenceNumber\\\":\\\"string\\\",\\\"hitStatus\\\":\\\"NO_HIT\\\",\\\"errors\\\":[{\\\"code\\\":\\\"TMNT\\\",\\\"description\\\":\\\"Teenage mutant ninja turtles\\\"}]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+</types:mule>

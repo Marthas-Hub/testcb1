@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+
+	<munit:config name="new-test-suite.xml" />
+
+	<munit:test name="TestTransformAllFieldsMapping" doc:id="39481fb7-9e85-4d58-976f-cb959b7bb04c" description="Test" ignore="true">
+		<munit:behavior >
+			<set-payload value='#[%dw 2.0
+output application/json
+---
+{
+  "hasConsumerDeclaration": true,
+  "alerts": [
+    {
+      "code": "string",
+      "description": "string"
+    }
+  ],
+  "bankruptcies": [
+    {
+      "filedDate": "2020-01-30",
+      "disposition": {
+        "status": "NONE",
+        "subStatus": "NONE",
+        "settledDate": "2020-01-30"
+      },
+      "assetAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "liabilityAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "agencyName": "string",
+      "assignedDate": "2020-01-30",
+      "verifiedDate": "2020-01-30",
+      "balanceAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "originalAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "code": "string",
+      "description": "string"
+    }
+  ],
+  "consumerStatements": [
+    {
+      "reportedDate": "2020-01-30",
+      "statement": "string"
+    }
+  ],
+  "judgments": [
+    {
+      "amount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "caseNumber": "string",
+      "courtName": "string",
+      "filedDate": "2020-01-30",
+      "satisfiedDate": "2020-01-30",
+      "status": {
+        "code": "string",
+        "description": "string"
+      },
+      "verifiedDate": "2020-01-30",
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "code": "string",
+      "description": "string"
+    }
+  ],
+  "inquiries": [
+    {
+      "customerId": "string",
+      "customerName": "string",
+      "inquiredDate": "2020-01-30"
+    }
+  ],
+  "otherNames": [
+    {
+      "firstName": "string",
+      "middleName": "string",
+      "lastName": "string",
+      "suffix": "string"
+    }
+  ],
+  "scores": [
+    {
+      "name": "string",
+      "result": 0
+    }
+  ],
+  "specialServices": [
+    {
+      "type": "NONE",
+      "reportedDate": "2020-01-30"
+    }
+  ],
+  "trades": [
+    {
+      "creditorName": "string",
+      "openedDate": "2020-01-30",
+      "reportedDate": "2020-01-30",
+      "balanceAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "highCreditAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "pastDueAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "paymentTermAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "paymentRate": {
+        "code": "string",
+        "description": "string"
+      },
+      "portfolioType": "NONE",
+      "status": "NONE",
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ]
+    }
+  ],
+  "bureauSource": "EQUIFAX",
+  "requestInfo": {
+    "customerId": "string",
+    "customerReferenceNumber": "YourReferenceNumber",
+    "requestDate": "2020-01-10"
+  },
+  "fileInfo": {
+    "bureauName": "string",
+    "fileId": "string",
+    "createdDate": "2020-01-30",
+    "lastActivityDate": "2020-01-30",
+    "totalNumberOfInquiries": 0
+  },
+  "isHit": true,
+  "hitStrength": "WEAK",
+  "subject": {
+    "dateOfBirth": "2020-01-30",
+    "dateOfDeath": "2020-01-30",
+    "socialInsuranceNumber": "string",
+    "maritalStatus": "UNKNOWN",
+    "numberOfDependants": 0,
+    "firstName": "string",
+    "middleName": "string",
+    "lastName": "string",
+    "suffix": "string"
+  },
+  "currentAddresses": [
+    {
+      "reportedDate": "2020-01-30",
+      "unitNumber": "101",
+      "civicNumber": "22905",
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "provinceCode": "AB",
+      "postalCode": "A1B2C3",
+      "countryCode": "CA"
+    }
+  ],
+  "previousAddresses": [
+    {
+      "reportedDate": "2020-01-30",
+      "unitNumber": "101",
+      "civicNumber": "22905",
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "provinceCode": "AB",
+      "postalCode": "A1B2C3",
+      "countryCode": "CA"
+    }
+  ],
+  "sourceResponse": "string",
+  "errors": [
+    {
+      "code": "string",
+      "description": "string"
+    }
+  ]
+}]' doc:name="Set Payload" doc:id="ed2d702a-a8ed-49a0-a363-4d97b9fec5e6" />
+		</munit:behavior>
+		<munit:execution>
+			<ee:transform doc:name="Transform Message" doc:id="379e0026-6de0-48db-a0f6-a32acbf4ed27" >
+				<ee:message >
+					<ee:set-payload resource="ts-credit-report-to-api-credit-report.dwl" />
+				</ee:message>
+			</ee:transform>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="9d93f0d5-7c68-4473-8663-b6e99b36c712" actual="#[payload]" expected='#[{ "scores": [
+    {
+      "result": 0,
+      "name": "string"
+    }
+  ],
+  "judgments": [
+    {
+      "filedDate": "2020-01-30",
+      "status": {
+        "code": "string",
+        "description": "string"
+      },
+      "caseNumber": "string",
+      "code": "string",
+      "courtName": "string",
+      "amount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "satisfiedDate": "2020-01-30",
+      "description": "string",
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "verifiedDate": "2020-01-30"
+    }
+  ],
+  "subject": {
+    "socialInsuranceNumber": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "dateOfDeath": "2020-01-30",
+    "dateOfBirth": "2020-01-30",
+    "middleName": "string",
+    "suffix": "string",
+    "numberOfDependants": 0,
+    "maritalStatus": "UNKNOWN"
+  },
+  "previousAddresses": [
+    {
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "reportedDate": "2020-01-30",
+      "provinceCode": "AB",
+      "countryCode": "CA",
+      "postalCode": "A1B2C3",
+      "unitNumber": "101",
+      "civicNumber": "22905"
+    }
+  ],
+  "currentAddresses": [
+    {
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "reportedDate": "2020-01-30",
+      "provinceCode": "AB",
+      "countryCode": "CA",
+      "postalCode": "A1B2C3",
+      "unitNumber": "101",
+      "civicNumber": "22905"
+    }
+  ],
+  "trades": [
+    {
+      "openedDate": "2020-01-30",
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "portfolioType": "NONE",
+      "creditorName": "string",
+      "reportedDate": "2020-01-30",
+      "paymentRate": {
+        "code": "string",
+        "description": "string"
+      },
+      "pastDueAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "balanceAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "highCreditAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "paymentTermAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "status": "NONE"
+    }
+  ],
+  "fileInfo": {
+    "createdDate": "2020-01-30",
+    "lastActivityDate": "2020-01-30",
+    "totalNumberOfInquiries": 0,
+    "bureauName": "string",
+    "fileId": "string"
+  },
+  "sourceResponse": "string",
+  "inquiries": [
+    {
+      "customerId": "string",
+      "customerName": "string",
+      "inquiredDate": "2020-01-30"
+    }
+  ],
+  "otherNames": [
+    {
+      "firstName": "string",
+      "lastName": "string",
+      "middleName": "string",
+      "suffix": "string"
+    }
+  ],
+  "isHit": true,
+  "collections": [
+    {
+      "balanceAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "code": "string",
+      "originalAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "description": "string",
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "assignedDate": "2020-01-30",
+      "agencyName": "string",
+      "verifiedDate": "2020-01-30"
+    }
+  ],
+  "bankruptcies": [
+    {
+      "disposition": {
+        "settledDate": "2020-01-30",
+        "subStatus": "NONE",
+        "status": "NONE"
+      },
+      "narratives": [
+        {
+          "code": "string",
+          "description": "string"
+        }
+      ],
+      "assetAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "liabilityAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "filedDate": "2020-01-30"
+    }
+  ],
+  "hasConsumerDeclaration": true,
+  "specialServices": [
+    {
+      "reportedDate": "2020-01-30",
+      "type": "NONE"
+    }
+  ],
+  "consumerStatements": [
+    {
+      "reportedDate": "2020-01-30",
+      "statement": "string"
+    }
+  ],
+  "hitStrength": "WEAK",
+  "errors": [
+    {
+      "code": "string",
+      "description": "string"
+    }
+  ]
+}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="testSomeFieldsMissing" doc:id="055d1689-a670-4e9d-af93-722136900e80" ignore="true">
+		<munit:behavior >
+			<set-payload value='#[%dw 2.0
+output application/json
+---
+{
+  "hasConsumerDeclaration": true,
+  "alerts": [
+    {
+      "code": "string"
+    }
+  ],
+  "bankruptcies": [
+    {
+      "disposition": {
+        "status": "NONE",
+        "settledDate": "2020-01-30"
+      },
+      "assetAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "liabilityAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "narratives": [
+        {
+          "code": "string",
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "agencyName": "string",
+      "assignedDate": "2020-01-30",
+      "verifiedDate": "2020-01-30",
+      "balanceAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "originalAmount": {
+      },
+      "narratives": [
+        {
+        }
+      ],
+      "code": "string",
+      "description": "string"
+    }
+  ],
+  "consumerStatements": [
+    {
+      "reportedDate": "2020-01-30",
+      "statement": "string"
+    }
+  ],
+  "judgments": [
+    {
+      "amount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "caseNumber": "string",
+      "satisfiedDate": "2020-01-30",
+      "status": {
+        "code": "string",
+        "description": "string"
+      },
+      "verifiedDate": "2020-01-30",
+      "narratives": [
+        {
+          "code": "string",
+        }
+      ],
+      "code": "string",
+      "description": "string"
+    }
+  ],
+  "inquiries": [
+    {
+      "customerId": "string",
+      "customerName": "string",
+      "inquiredDate": "2020-01-30"
+    }
+  ],
+  "otherNames": [
+    {
+      "firstName": "string",
+      "lastName": "string"
+    }
+  ],
+  "scores": [
+    {
+      "name": "string",
+      "result": 0
+    }
+  ],
+  "specialServices": [
+    {
+      "type": "NONE",
+      "reportedDate": "2020-01-30"
+    }
+  ],
+  "bureauSource": "EQUIFAX",
+  "requestInfo": {
+    "customerId": "string",
+    "customerReferenceNumber": "YourReferenceNumber",
+    "requestDate": "2020-01-10"
+  },
+  "fileInfo": {
+  },
+  "subject": {
+    "dateOfBirth": "2020-01-30",
+    "socialInsuranceNumber": "string",
+    "maritalStatus": "UNKNOWN",
+    "firstName": "string",
+    "lastName": "string"
+  },
+  "currentAddresses": [
+    {
+      "reportedDate": "2020-01-30",
+      "unitNumber": "101",
+      "civicNumber": "22905",
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "provinceCode": "AB",
+      "postalCode": "A1B2C3",
+      "countryCode": "CA"
+    }
+  ],
+  "previousAddresses": [
+    {
+      "reportedDate": "2020-01-30",
+      "unitNumber": "101",
+      "civicNumber": "22905",
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "provinceCode": "AB",
+      "postalCode": "A1B2C3",
+      "countryCode": "CA"
+    }
+  ]
+}]' doc:name="Set Payload" doc:id="f7639734-a45b-43ad-8ddb-c1f7dd83d561" />
+		</munit:behavior>
+		<munit:execution >
+	        <ee:transform doc:name="Transform Message" doc:id="87409f78-38f4-4a4e-87c4-eb91d7ac9c45">
+	            <ee:message>
+	                <ee:set-payload resource="ts-credit-report-to-api-credit-report.dwl" />
+	            </ee:message>
+	        </ee:transform>
+		</munit:execution>
+		<munit:validation >
+			<logger level="INFO" doc:name="Logger" doc:id="ebc46209-2c60-4eb3-9cb5-358102e7d4ab" message="payload is #[payload]"/>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="5db8161b-de9a-47f4-8f23-4de1500e3e87" actual="#[payload]" expected='#[{
+  "scores": [
+    {
+      "result": 0,
+      "name": "string"
+    }
+  ],
+  "judgments": [
+    {
+      "status": {
+        "code": "string",
+        "description": "string"
+      },
+      "caseNumber": "string",
+      "code": "string",
+      "amount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "satisfiedDate": "2020-01-30",
+      "description": "string",
+      "narratives": [
+        {
+          "code": "string"
+        }
+      ],
+      "verifiedDate": "2020-01-30"
+    }
+  ],
+  "subject": {
+    "socialInsuranceNumber": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "dateOfBirth": "2020-01-30",
+    "maritalStatus": "UNKNOWN"
+  },
+  "previousAddresses": [
+    {
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "reportedDate": "2020-01-30",
+      "provinceCode": "AB",
+      "countryCode": "CA",
+      "postalCode": "A1B2C3",
+      "unitNumber": "101",
+      "civicNumber": "22905"
+    }
+  ],
+  "currentAddresses": [
+    {
+      "streetName": "Sunset Ave",
+      "city": "Calgary",
+      "reportedDate": "2020-01-30",
+      "provinceCode": "AB",
+      "countryCode": "CA",
+      "postalCode": "A1B2C3",
+      "unitNumber": "101",
+      "civicNumber": "22905"
+    }
+  ],
+  "fileInfo": {
+    
+  },
+  "inquiries": [
+    {
+      "customerId": "string",
+      "customerName": "string",
+      "inquiredDate": "2020-01-30"
+    }
+  ],
+  "otherNames": [
+    {
+      "firstName": "string",
+      "lastName": "string"
+    }
+  ],
+  "collections": [
+    {
+      "balanceAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "code": "string",
+      "originalAmount": {
+        
+      },
+      "description": "string",
+      "narratives": [
+        {
+          
+        }
+      ],
+      "assignedDate": "2020-01-30",
+      "agencyName": "string",
+      "verifiedDate": "2020-01-30"
+    }
+  ],
+  "bankruptcies": [
+    {
+      "disposition": {
+        "settledDate": "2020-01-30",
+        "status": "NONE"
+      },
+      "narratives": [
+        {
+          "code": "string"
+        }
+      ],
+      "assetAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      },
+      "liabilityAmount": {
+        "amount": "25.00",
+        "currencyCode": "CAD"
+      }
+    }
+  ],
+  "hasConsumerDeclaration": true,
+  "specialServices": [
+    {
+      "reportedDate": "2020-01-30",
+      "type": "NONE"
+    }
+  ],
+  "consumerStatements": [
+    {
+      "reportedDate": "2020-01-30",
+      "statement": "string"
+    }
+  ]
+}]'/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

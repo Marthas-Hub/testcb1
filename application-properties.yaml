@@ -1,0 +1,96 @@
+thirdstream.host:
+  description: host url for making requests to thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - test.thirdstream.ca
+thirdstream.credit-bureau.api-key:
+  description: API Key used for authentication when making requests to Thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - edf6351a94ef4e2eb7f9f30bcad45702
+https.thirdstream.commercial.credit.api.key:
+  description: API Key used for authentication when making commercial-related requests to Thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - fe6402ca1eb24b1c8252809b271ff954
+thirdstream.credit-bureau.basepath:
+  description: base path of Thirdstream URL when making requests to Thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - /test/creditbureau/v2
+https.thirdstream.basepath:
+  description: base path of Thirdstream URL when making requests to Thirdstream related to Equifax 
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - /equifaxcommercialcredit
+https.thirdstream.path:
+  description: major version in the Thirdstream URL path
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - v3
+https.thirdstream.port:
+  description: Port used for making requests to Thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - 443
+https.thirdstream.response.timeout:
+  description: Time in milliseconds before a timeout is triggered when waiting for a response from Thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - 30000
+productGroup:
+  description: passed in the X-API-Scope header when making requests to Thirdstream
+  since: 1.0.0
+  optional: false
+  secret: false
+  examples:
+  - lending
+  
+## Standard Properties ##
+api.id:
+  description: API Instance Identifier
+  required: true
+  default: 0
+  hidden: false
+  since: 1.0.0
+  examples:
+  - 4800870
+  documentation:
+    - title: Source
+      content: "[API Manager](https://anypoint.mulesoft.com/apimanager/canadian-western-bank/). See [Determining API Instance ID on API Manager](https://docs.mulesoft.com/api-manager/2.x/find-api-id-task) for details."
+
+anypoint.platform.client_secret:
+  description: Anypoint Platform Client Secret
+  required: true
+  hidden: true
+  since: 1.0.0
+  documentation:
+    - title: Source
+      content: "*Environment Information* button in (API Manager)[https://anypoint.mulesoft.com/apimanager/canadian-western-bank/]. See [Obtaining Environment Credentials](https://docs.mulesoft.com/api-manager/2.x/org-credentials-config-mule4#obtaining-environment-credentials-recommended) for detaills."
+
+anypoint.platform.client_id:
+  description: Anypoint Platform Client Id
+  required: true
+  hidden: false
+  since: 1.0.0
+  examples:
+  - 91a05c8415d4420a807de35a941281b6
+  documentation:
+    - title: Source
+      content: "*Environment Information* button in (API Manager)[https://anypoint.mulesoft.com/apimanager/canadian-western-bank/]. See [Obtaining Environment Credentials](https://docs.mulesoft.com/api-manager/2.x/org-credentials-config-mule4#obtaining-environment-credentials-recommended) for details."
